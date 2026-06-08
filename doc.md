@@ -36,6 +36,21 @@ Primero que todo, en Java, *Nada puede existir fuera de una clase*. Todas las va
 y el fichero no se podría compilar.
 
 #### Sobre cómo crear una plantilla (Clase)
+La estructura para crear una clase siempre será la siguiente:
+```Java
+visibilidad class NombreDeClase{
+  // code
+}
+```
+El nombre de la clase siempre irá en *PascalCase*. Siempre y cuando ya exista una clase
+con visibilidad pública, las demás deberán de ser del tipo default.
+
+### Tipos de visibilidades
+- Public: Lo ve todo el proyecto (Cualquier carpeta).
+- Protected: Lo ven las clases de la misma carpeta y sus hijas (Herencia).
+- Default: Solo lo ven las clases que comparten la misma carpeta.
+- Private: Solo lo ve la misma clase que lo contiene entre sus llaves.
+
 Existen clases privadas tanto dentro de la clase pública como dentro de una clase con visibilidad por defecto. No existen clases privadas fuera de la clase pública (No tendría sentido ocultarse de nadie).
 
 Con esto podemos escribir el siguiente código y note que, a priori, no daría error.
@@ -62,22 +77,6 @@ public class Vehicle {
 
 En ambos casos, si lo llegase a compilar y a ejectuar, le saldría el mensaje de que 
 efectivamente existe la plantilla pero no tiene un método Main (Nada a ejecutar).
-
-La estructura para crear una clase siempre será la siguiente:
-```Java
-visibilidad class NombreDeClase{
-  // code
-}
-```
-El nombre de la clase siempre irá en *PascalCase*. Siempre y cuando ya exista una clase
-con visibilidad pública, las demás deberán de ser del tipo default.
-
-### Tipos de visibilidades
-- Public: Lo ve todo el proyecto (Cualquier carpeta).
-- Protected: Lo ven las clases de la misma carpeta y sus hijas (Herencia).
-- Default: Solo lo ven las clases que comparten la misma carpeta.
-- Private: Solo lo ve la misma clase que lo contiene entre sus llaves.
-
 
 
 ### 1. Packpage
