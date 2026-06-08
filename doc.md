@@ -35,8 +35,8 @@ Primero que todo, en Java, *Nada puede existir fuera de una clase*. Todas las va
 (atributos) y funciones (métodos) deben de estar en una clase, de lo contrario, no existe
 y el fichero no se podría compilar.
 
-### Sobre cómo crear una plantilla (Clase)
-Antes que nada, existen clases privadas tanto dentro de la clase pública como dentro de una clase con visibilidad por defecto. No existen clases privadas fuera de la clase pública (No tendría sentido ocultarde de nadie).
+#### Sobre cómo crear una plantilla (Clase)
+Existen clases privadas tanto dentro de la clase pública como dentro de una clase con visibilidad por defecto. No existen clases privadas fuera de la clase pública (No tendría sentido ocultarse de nadie).
 
 Con esto podemos escribir el siguiente código y note que, a priori, no daría error.
 ```Java
