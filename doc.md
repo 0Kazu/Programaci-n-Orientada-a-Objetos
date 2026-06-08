@@ -29,6 +29,72 @@ y tiene su propio estado.
 Antes de aprender POO, necesitamos un lenguaje para poder aplicar este 
 paradigma. Por lo que procederemos a aprender sobre Java.
 
+## Sintaxis de Java
+### Sobre escribir como en python (De la nada)
+Primero que todo, en Java, *Nada puede existir fuera de una clase*. Todas las variables
+(atributos) y funciones (métodos) deben de estar en una clase, de lo contrario, no existe
+y el fichero no se podría compilar.
+
+### Sobre cómo crear una plantilla (Clase)
+Antes que nada, existen clases privadas tanto dentro de la clase pública como dentro de una clase con visibilidad por defecto. No existen clases privadas fuera de la clase pública (No tendría sentido ocultarde de nadie).
+
+Con esto podemos escribir el siguiente código y note que, a priori, no daría error.
+```Java
+// Nombre archivo: carro.java 
+// Así, no es necesario que tengan el mismo nombre de la clase
+
+class Vehicle {
+  String color;
+  int power;
+  int seats;
+}
+```
+
+```Java
+// Nombre archivo: Vehicle.java
+// Si es public, debe llamarse como el fichero
+public class Vehicle {
+  String color;
+  int power;
+  int seats;
+}
+```
+
+En ambos casos, si lo llegase a compilar y a ejectuar, le saldría el mensaje de que 
+efectivamente existe la plantilla pero no tiene un método Main (Nada a ejecutar).
+
+La estructura para crear una clase siempre será la siguiente:
+```Java
+visibilidad class NombreDeClase{
+  // code
+}
+```
+El nombre de la clase siempre irá en *PascalCase*. Siempre y cuando ya exista una clase
+con visibilidad pública, las demás deberán de ser del tipo default.
+
+### Tipos de visibilidades
+- Public: Lo ve todo el proyecto (Cualquier carpeta).
+- Protected: Lo ven las clases de la misma carpeta y sus hijas (Herencia).
+- Default: Solo lo ven las clases que comparten la misma carpeta.
+- Private: Solo lo ve la misma clase que lo contiene entre sus llaves.
+
+
+
+### 1. Packpage
+
+### 2. Import
+Luego, van todas las librerías que se desea importar al proyecto.
+```Java
+import java.util.Scanner; // Para importar la librería Scanner
+}
+```
+
+### 3. La "Clase principal"
+Podrán existir N clases pero sólo una de ellas tendrá la keyword *public*. 
+Dicha clase es la principal de todo el programa. Dentro de esa clase
+
+
+
 ### Clase Scanner
 Scanner es una clase de Java que define propiedades y métodos (obviamente). Usamos ésta clase para crear objetos de tipo entrada de datos (Pedir datos al usuario). Para crear
 una instancia de la clase Scanner en Java (Es decir, un objeto):
