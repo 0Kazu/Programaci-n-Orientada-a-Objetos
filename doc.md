@@ -35,14 +35,14 @@ Primero que todo, en Java, *Nada puede existir fuera de una clase*. Todas las va
 (atributos) y funciones (métodos) deben de estar en una clase, de lo contrario, no existe
 y el fichero no se podría compilar.
 
-#### Sobre cómo crear una plantilla (Clase)
+### Sobre cómo crear una plantilla (Clase)
 La estructura para crear una clase siempre será la siguiente:
 ```Java
 visibilidad class NombreDeClase{
   // code
 }
 ```
-El nombre de la clase siempre irá en *PascalCase*. Siempre y cuando ya exista una clase
+El nombre de la clase siempre irá en *PascalCase*. Siempre y cuando exista una clase
 con visibilidad pública, las demás deberán de ser del tipo default.
 
 ### Tipos de visibilidades
@@ -51,12 +51,16 @@ con visibilidad pública, las demás deberán de ser del tipo default.
 - Default: Solo lo ven las clases que comparten la misma carpeta.
 - Private: Solo lo ve la misma clase que lo contiene entre sus llaves.
 
+Aunque en la práctica no es "sólo ver" la clase sino mas bien instanciarla.
+
+### Sobre clases privadas
 Existen clases privadas tanto dentro de la clase pública como dentro de una clase con visibilidad por defecto. No existen clases privadas fuera de la clase pública (No tendría sentido ocultarse de nadie).
 
 Con esto podemos escribir el siguiente código y note que, a priori, no daría error.
 ```Java
 // Nombre archivo: carro.java 
 // Así, no es necesario que tengan el mismo nombre de la clase
+// Visibilidad por defecto
 
 class Vehicle {
   String color;
@@ -78,6 +82,56 @@ public class Vehicle {
 En ambos casos, si lo llegase a compilar y a ejectuar, le saldría el mensaje de que 
 efectivamente existe la plantilla pero no tiene un método Main (Nada a ejecutar).
 
+### Método Main
+Podrías verlo como el botón de encendido de la clase. Es lo primero que Java busca
+a toda velocidad en una clase. Éste indica desde dónde se iniciará el programa.
+
+```Java
+public static void main(String[] args)
+```
+
+Cabe aclarar que éste método *siempre* es público.
+
+### Ejmplo práctico de una clase
+```Java
+// Nombre archivo: Main.java
+
+class Estudiante {
+  String nombre;
+  static String universidad = "ESPOL";
+}
+ 
+public class Main {
+  public static void main(String[] args) {
+    Estudiante e1 = new Estudiante();
+    Estudiante e2 = new Estudiante();
+
+    e1.nombre = "Carlos";
+    e2.nombre = "Ana";
+
+    System.out.println(e1.nombre);
+    System.out.println(e2.nombre);
+
+  // ambos comparten universidad
+    System.out.println(Estudiante.universidad);
+  }
+}
+```
+
+### Declaración de variables
+La estructura para delcarar una variable es la siguiente:
+```Java
+// nombre archivo: Main.java
+public class Main{
+  modificadorTipo nombreVariable; // el nombre va en camelCase
+}
+```
+
+#### Tipos de modificadores en variables
+- Private: Sólo la misma clase puede acceder a ella (dentro de sus respectivos {}).
+- Default: Sólo lo ven las clases que comparten la misma carpeta.
+- Protected: Lo mismo que el default inclyendo a las subclases.
+- Public: Vista general, todos pueden ver la variable y manipularla.
 
 ### 1. Packpage
 
