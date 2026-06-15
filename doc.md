@@ -46,9 +46,7 @@ visibilidad class NombreDeClase{
 Por ejemplo:
 ```Java
 class Estudiante {
-
-String nombre; // instancia
-static String universidad = “ESPOL"; // clase
+  // code
 }
 ```
 
