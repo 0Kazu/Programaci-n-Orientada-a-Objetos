@@ -43,6 +43,15 @@ visibilidad class NombreDeClase{
   // code
 }
 ```
+Por ejemplo:
+```Java
+class Estudiante {
+
+String nombre; // instancia
+static String universidad = “ESPOL"; // clase
+}
+```
+
 El nombre de la clase siempre irá en **PascalCase**. **Siempre y cuando exista una clase
 con visibilidad pública, las demás deberán de ser del tipo default**.
 
