@@ -45,15 +45,16 @@ visibilidad class NombreDeClase{
 ```
 Por ejemplo:
 ```Java
-publi class Estudiante {
+public class Estudiante {
   // code
 }
 ```
 
 El nombre de la clase siempre irá en **PascalCase**. Siempre y cuando **exista una clase
-con visibilidad pública, las demás deberán de ser del tipo default**.
+con visibilidad pública, las demás deberán de ser del tipo default o privadas**.
 
 ### Tipos de visibilidades
+Cómo las demas clases ven a una clase.
 - Public: Lo ve todo el proyecto (Cualquier carpeta).
 - Protected: Lo ven las clases de la misma carpeta y sus hijas (Herencia).
 - Default: Solo lo ven las clases que comparten la misma carpeta.
