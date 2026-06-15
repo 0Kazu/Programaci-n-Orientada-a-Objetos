@@ -55,7 +55,7 @@ con visibilidad pública, las demás deberán de ser del tipo default o privadas
 
 ### Tipos de visibilidades
 Cómo las demas clases ven a una clase.
-- Public: Lo ve todo el proyecto (Cualquier carpeta).
+- Public: Lo ve cualquier clase del proyecto (Cualquier carpeta).
 - Protected: Lo ven las clases de la misma carpeta y sus hijas (Herencia).
 - Default: Solo lo ven las clases que comparten la misma carpeta.
 - Private: Solo lo ve la misma clase que lo contiene entre sus llaves.
@@ -180,3 +180,29 @@ sc.nextInt();
 
 - Cada vez que ejecutamos código en la terminal, la JVM instancia un objeto de 
   éste, pero sólo lee el Main del objeto además de sus variables estáticas.
+
+
+Codigo Taller
+public static void main(String[] args) {
+        
+        // Construir un arreglo vacío para diez valores enteros
+        int[] arreglo = new int[10];
+        
+        System.out.println("La longitud del arreglo es:  " + arreglo.length);
+        
+        // Asignar valores generados por el usuario en cada campo
+        Scanner sc = new Scanner(System.in);
+        
+        for (int i = 0; i < arreglo.length; i++){
+            System.out.println("Ingrese el elemento " + i + " del arreglo");
+            arreglo[i] = sc.nextInt();
+            
+            if (arreglo[i] > 5) {
+                arreglo[i] = 100;
+            }
+            
+            System.out.println("Arreglo en la posición " + i + " es " + arreglo[i]);
+        }
+        
+        sc.close();
+    }
