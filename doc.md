@@ -33,7 +33,8 @@ paradigma. Por lo que procederemos a aprender sobre Java.
 ### Sobre escribir como en python (De la nada)
 Primero que todo, en Java, *Nada puede existir fuera de una clase*. Todas las variables
 (atributos) y funciones (métodos) deben de estar en una clase, de lo contrario, no existe
-y el fichero no se podría compilar.
+y el fichero no se podría compilar. Esto es debido a que java es un lenguaje orientado a 
+objetos (Todo existe solo con una clase y nada existe sin una).
 
 ### Sobre cómo crear una plantilla (Clase)
 La estructura para crear una clase siempre será la siguiente:
