@@ -45,12 +45,12 @@ visibilidad class NombreDeClase{
 ```
 Por ejemplo:
 ```Java
-class Estudiante {
+publi class Estudiante {
   // code
 }
 ```
 
-El nombre de la clase siempre irá en **PascalCase**. **Siempre y cuando exista una clase
+El nombre de la clase siempre irá en **PascalCase**. Siempre y cuando **exista una clase
 con visibilidad pública, las demás deberán de ser del tipo default**.
 
 ### Tipos de visibilidades
