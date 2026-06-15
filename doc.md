@@ -13,13 +13,13 @@ el problema en problemas más pequeños, mas bien, lo descomponemos en objetos d
 Es la representación abstracta de una entidad o de un concepto. También se lo asocia 
 con un elemento del problema.
 
-Los objetos poseen *estados* y *comportamientos*:
+Los objetos poseen **estados** y **comportamientos**:
 - Estados: Valores de sus propiedades (atributos = propiedades).
 - Comportamientos: Acciones que puede realizar el objeto (métodos).
 
 ### Clase
 Una clase es un plano o mapa que define cuáles son los atributos y métodos
-que un objeto tendrá. También se la conoce como *unidad básica* en POO.
+que un objeto tendrá. También se la conoce como **unidad básica** en POO.
 
 - ![Clases Vs Objetos](./Img/clasesObjetos.jpg)
 
@@ -31,7 +31,7 @@ paradigma. Por lo que procederemos a aprender sobre Java.
 
 ## Sintaxis de Java
 ### Sobre escribir como en python (De la nada)
-Primero que todo, en Java, *Nada puede existir fuera de una clase*. Todas las variables
+Primero que todo, en Java, **Nada puede existir fuera de una clase**. Todas las variables
 (atributos) y funciones (métodos) deben de estar en una clase, de lo contrario, no existe
 y el fichero no se podría compilar. Esto es debido a que java es un lenguaje orientado a 
 objetos (Todo existe solo con una clase y nada existe sin una).
@@ -43,8 +43,8 @@ visibilidad class NombreDeClase{
   // code
 }
 ```
-El nombre de la clase siempre irá en *PascalCase*. Siempre y cuando exista una clase
-con visibilidad pública, las demás deberán de ser del tipo default.
+El nombre de la clase siempre irá en **PascalCase**. **Siempre y cuando exista una clase
+con visibilidad pública, las demás deberán de ser del tipo default**.
 
 ### Tipos de visibilidades
 - Public: Lo ve todo el proyecto (Cualquier carpeta).
@@ -91,7 +91,7 @@ a toda velocidad en una clase. Éste indica desde dónde se iniciará el program
 public static void main(String[] args)
 ```
 
-Cabe aclarar que éste método *siempre* es público.
+Cabe aclarar que éste método **siempre** es público.
 
 ### Ejmplo práctico de una clase
 ```Java
