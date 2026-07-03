@@ -495,7 +495,7 @@ encuentren en el mismo paquete.
 
 - El modificador **protected** permite acceso siempre y cuando los solicitantes se encuentren
 en el mismo paquete y a cualquier subclase incluso cuando no se encuentren en el mismo paquete.
-
+S
 ### Getter and Setters
 
 ### Conversión automática de tipo
