@@ -157,9 +157,24 @@ public class Main {
 
   modificador tipo nombreMetodo(parameter-list) {
     // code
+
+    return variableDeTipotipo;
   }
 }
 ```
+
+#### Firma de un método
+La firma de un método es cómo Java ve al método al momento
+de guardar espacio en la memoria. Por ejemplo:
+
+```Java
+public int acelerar(int velocidadInicial, String tipoTerreno) {
+    // Lógica aquí...
+    return 100;
+}
+```
+
+Su firma es: acelerar(int, String)
 
 #### Tipos de datos de un método 
 Con el **tipo** nos referimos al dato que retornará la función. Por ejemplo,
@@ -167,24 +182,271 @@ si quisieramos sumar números, entonces la función tendría que retornar un nú
 (entero o decimal), también pueden retornar objetos. Pueden haber casos en los 
 que queremos que una función no retorne nada, por lo que usamos la keyword **void**.
 
-### Ubicación del proyecto Java en código (packpage)
+### Ubicación del proyecto Java en código (package)
+Al momento de crear un archivo Java, con el propósito de crear una solución, es recomendable
+trabajar esa solución como un proyecto. Ahora bien, la notación para indicarle a Java el
+"proyecto" en el que "vive el fichero .java":
 
-
-
-### 1. Packpage
-
-### 2. Import
-Luego, van todas las librerías que se desea importar al proyecto.
 ```Java
-import java.util.Scanner; // Para importar la librería Scanner
+package nombreDeLaCarpetaDelProyecto 
+
+// nombre archivo: Main.java
+public class Main {
+  // code
 }
 ```
 
-### 3. La "Clase principal"
-Podrán existir N clases pero sólo una de ellas tendrá la keyword *public*. 
-Dicha clase es la principal de todo el programa. Dentro de esa clase
+Aunque más bien le estamos diciendo en que carpeta vive el fichero Java.
+
+Si el fichero Java está dentro de la carpeta general, entonces:
+```Java
+package carpetaGeneral.carpetaHija
+// "Oye, tú vives en la carpeta carpetaHija, que a su vez está dentro de la carpetaGeneral
+
+// nombre archivo: Main.java
+public class Main {
+  // code
+}
+```
+
+### Llamar a código externo (import)
+Si queremos usar código que está en otra carpeta (diferente paquete), usamos
+la keyword reservada **import**, de esta forma:
+
+```Java
+package ubicacionPaquete
+
+import carpetaPadre.carpetaHija.ficheroJava
+
+// nombre archivo: Main.java
+public class Main {
+  // code
+}
+```
 
 
+
+### Creación de objetos en Java
+Dado que ya tenemos el lugar para escribir código, veamos cómo podemos
+crear objetos (instanciar clases). La sintaxis es la siguiente: 
+
+```Java
+package nombreDeLaCarpetaDelProyecto 
+
+// nombre archivo: Main.java
+public class Main {
+  // CrearObjeto
+  Type nombre_variable = new Type();
+}
+```
+
+Así, hacemos uso de la keyword reservada **new**.
+
+### Acceder a las propiedades y métodos de un objeto
+Lo más común en el paradigma de la programación orientada a objetos es acceder a
+éstos y modificar sus atributos o comportamientos. Nos valemos de la siguiente sintaxis ".":
+
+```Java
+package nombreDeLaCarpetaDelProyecto 
+
+// nombre archivo: Main.java
+public class Main {
+  // CrearObjeto
+  Type nombre_variable = new Type();
+
+  nombre_variable.nombreMetodo();
+  nombre_variable.nombreAtributo;
+}
+```
+
+### Valor vs Referencia
+Los tipos de datos que encontramos en Java son de 2 tipos: primitivos y de
+referencia. 
+
+- **Datos primitivos**: boolean, byte, char, short, int, long, float y double.
+
+- **De referencia**: Todos aquellos que no son primitivos, de hecho, estos tipos 
+de datos suelen estar compuestos de datos primitivos (Como Strings).
+
+Java tiene diferentes formas de almacenar los datos dependiendo de su tipo. De hecho, 
+las variables de **tipo primitivo almacenan el valor** mientras que las variables de
+**tipo clase almacenan la referencia**.
+
+Por ejemplo:
+
+![Clases Vs Objetos](./Img/datosvsrferencia.png)
+
+Podría verlo como que el dato solo existe en un lugar de la memoria. Por otro lado, un objeto
+es más bien una referencia en la memoria, Java sólo ve hacia donde apunta ese objeto.
+
+De hecho, sea a = 20 y b = a. Entonces, para java, la situación es la siguiente:
+
+![Clases Vs Objetos](./Img/datosvsreferencia1.png)
+
+En cambio, si creamos objetos, éstos no solamente existen. Los objetos al crarse
+apuntan a un lugar de la memoria (Su referencia). Por ejemplo:
+
+![Clases Vs Objetos](./Img/datovsreferencia2.png)
+
+Note que si: Pokemon pk4 = pk1; pk4 apuntará a la referencia de un objeto ya creado:
+
+![Clases Vs Objetos](./Img/datovsreferencia3.png)
+
+Dado que ambos objetos tienen mismas referencias, al cambiar un atributo de pk4
+o pk1, estamos afectando a ambos objetos. De hecho:
+
+![Clases Vs Objetos](./Img/datovsreferencia4.png)
+
+### Variables de Instancia vs Variables Locales
+#### Variables locales
+- Es una variable declarada dentro de la definición de un método o función.
+
+- Deben ser inicializadas antes de ser utilizadas (No puede haber un int numeroSuerte; sino int numeroSuerte = 1;)
+
+#### Variables de Instancia
+- Es la variable definida para todas las intancias de una clase (Estado del objeto).
+
+- Toman un valor predeterminado si no son inicializadas.
+
+#### Valor predeterminado para variables de instancia
+- **Objetos** -> null
+
+- **int, byte, long** -> 0
+
+- **double, float** -> 0.0
+
+- **char** -> ''
+
+- **boolean** -> false
+
+### Tipo de dato null
+Es un valor espacial que se puede asignar a cualquier tipo de referencia. Se usa
+para indicar que una variable de referencia **no apunta a un objeto aún**.
+
+Por lo tanto, no es posible int a = null; porque int no es un tipo de dato de referencia
+sino primitivo.
+
+Como en Unity con C#, si queremos validar que un objeto no es nulo, entonces se verifica
+la proposición **objectName != null** o su equivalente sin negación **objectName == null**.
+
+### Constructores
+Los constructores son muy importantes al momento de llamar a un objeto. Cuando nosotros
+usamos la keyword **new**: ```Pokemon pk1 = new Pokemon();```; la parte de ```Pokemon()```
+hace referencia a su constructor.
+
+Son tipos especiales de métodos de métodos que son responsables de crear e 
+inicializar un objeto de esa clase.
+
+Al declarar un constructor debemos de tener en cuenta que:
+- Éste tiene el mismo nombre que la clase.
+
+- El constructor no retorna ningún tipo de dato.
+
+- No siempre son públicos.
+
+Por ejemplo:
+```Java
+// Un fichero
+package this
+
+public class Rectangulo {
+  String color;
+  double ancho;
+  double alto;
+
+  //constructor de la clase rectangulo
+  public Rectangulo(double w, double h){
+  color = "negro";
+  ancho = w;
+  alto = h;
+  }
+}
+
+// Otro fichero
+package this.children
+
+public class TestRectangulo {
+  public static void main(String[] args){
+  //crea un nuevo objeto de tipo rectangulo con ancho de 10, alto de 5 y de color negro
+  Rectangulo r1 = new Rectangulo(10,5);
+  //para acceder a las variables del objeto se usa la notacion de punto
+  System.out.println("r1 {ancho:"+r1.ancho+" alto:"+r1.alto+"");
+
+  //crea un nuevo objeto de tipo rectangulo con un ancho de 4 y un alto de 2 y de color negro
+  Rectangulo r2 = new Rectangulo(4,2);
+  System.out.println("r2 {ancho:"+r1.ancho+" alto:"+r1.alto+"");
+  }
+}
+```
+
+Una objeto no se limita sólo a un constructor, éste puede tener N constructores pero deben
+de tener diferentes firmas. No puede haber ```public Cuadro(int alto)``` y ```public Cuadro(int altoN)``` en 
+**Cuadro.Java**.
+
+Por ejemplo:
+
+```Java
+public class Rectangulo {
+  String color;
+  double ancho;
+  double alto;
+
+  //constructor 1
+  public Rectangulo(double w, double h, String colorp){
+  color = colorp;
+  ancho = w;
+  alto = h;
+  }
+
+  //constructor 2
+  public Rectangulo(double w, double h){
+  color = "negro";
+  ancho = w;
+  alto = h;
+  }
+}
+```
+
+### Keyword **this**
+"this" es literalmente una referencia al objeto actual. Se usa esta palabra reservada
+cada vez que tengamos que hacer referencia al objeto que invoca al método.
+
+Por ejemplo:
+
+```Java
+public class Point {
+  public int x = 0;
+  public int y = 0;
+
+  //Constructor 
+  public Point(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+```
+El operador this también es usado dentro de un constructor para llamar a otro constructor
+dentro de la misma clase. 
+
+Por ejemplo:
+
+```Java
+public class Rectangulo {
+  String color;
+  double ancho;
+  double alto;
+  //constructor 1
+  public Rectangulo(double ancho, double alto, String color){
+    this.ancho = ancho;
+    this.alto = alto;
+    this.color = color;
+  }
+  //constructor 2
+  public Rectangulo(double ancho, double alto){
+    this(ancho,alto,"negro");
+  }
+}
+```
 
 ### Clase Scanner
 Scanner es una clase de Java que define propiedades y métodos (obviamente). Usamos ésta clase para crear objetos de tipo entrada de datos (Pedir datos al usuario). Para crear
