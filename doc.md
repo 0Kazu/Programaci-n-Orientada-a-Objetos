@@ -495,8 +495,19 @@ encuentren en el mismo paquete.
 
 - El modificador **protected** permite acceso siempre y cuando los solicitantes se encuentren
 en el mismo paquete y a cualquier subclase incluso cuando no se encuentren en el mismo paquete.
-S
+
 ### Getter and Setters
+Lo ideal es que los atributos de las clases sean privadas. Para acceder o manipular éstos 
+atributos privados hacemos usos de Getters y Setters.
+
+Los Getters y Setters no son nada más que
+funciones (métodos) del objeto 
+
+- los Setters y Getters normalmente son métodos con acceso public.
+
+- Los **Setters** no retornan valor alguno (void), sólo sirven para modificar el atributo.
+
+- Los **Getters** son métodos que retornan un valor en específico (Así obtenemos sólo datos que nos interesan).
 
 ### Conversión automática de tipo
 
