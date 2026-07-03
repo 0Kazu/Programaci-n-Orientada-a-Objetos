@@ -51,7 +51,7 @@ public class Estudiante {
 ```
 
 El nombre de la clase siempre irá en **PascalCase**. Siempre y cuando **exista una clase
-con visibilidad pública, las demás deberán de ser del tipo default o privadas**.
+con visibilidad pública, las demás deberán de ser del tipo default**.
 
 #### Tipos de visibilidades
 Cómo las demas clases ven a una clase.
