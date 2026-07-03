@@ -56,7 +56,7 @@ con visibilidad pública, las demás deberán de ser del tipo default o privadas
 #### Tipos de visibilidades
 Cómo las demas clases ven a una clase.
 - Public: Lo ve cualquier clase del proyecto (Cualquier carpeta).
-- Protected: Lo ven las clases de la misma carpeta y sus hijas (Herencia).
+- Protected: Lo ven las clases de la misma carpeta y sus subclases (Herencia).
 - Default: Solo lo ven las clases que comparten la misma carpeta.
 - Private: Solo lo ve la misma clase que lo contiene entre sus llaves.
 
@@ -183,9 +183,9 @@ si quisieramos sumar números, entonces la función tendría que retornar un nú
 que queremos que una función no retorne nada, por lo que usamos la keyword **void**.
 
 ### Ubicación del proyecto Java en código (package)
-Al momento de crear un archivo Java, con el propósito de crear una solución, es recomendable
-trabajar esa solución como un proyecto. Ahora bien, la notación para indicarle a Java el
-"proyecto" en el que "vive el fichero .java":
+Al momento de crear un archivo Java, con el propósito de desarrollar una solución, es recomendable
+trabajar esa solución como un proyecto. Ahora bien, la sintaxis para indicarle a Java el
+"proyecto" en el que "vive el fichero .java" es la siguiente:
 
 ```Java
 package nombreDeLaCarpetaDelProyecto 
@@ -407,6 +407,17 @@ public class Rectangulo {
 }
 ```
 
+Es importante tomar en cuenta que:
+- Toda clase necesita al menos un constructor.
+
+- Si una clase no declara un constructor de forma explícita, 
+Java creará el constructor predeterminado en tiempo de compilación.
+
+- El constructor predeterminado es un constructor que no recibe
+parámetros y tiene modificador de acceso público.
+
+- Si ya existe un constructor entonces Java no considerará el predeterminado.z
+
 ### Keyword **this**
 "this" es literalmente una referencia al objeto actual. Se usa esta palabra reservada
 cada vez que tengamos que hacer referencia al objeto que invoca al método.
@@ -447,6 +458,60 @@ public class Rectangulo {
   }
 }
 ```
+
+### Manejo de memoria en Java
+Existen dos regiones de memoria, tal como se muestra a continuación:
+
+![Clases Vs Objetos](./Img/stackHeap.png)
+
+- **Stack**: Usada para almacenar las variables locales.
+
+- **Heap**: Usada para almacenar los objetos (referencias).
+
+
+## Pilares de POO aplicados a Java
+### Encapsulamiento
+Es el mecanismo que combina la data y al funcionalidad asociada a ella en una
+sola unidad (clase). Ya que el propósito de la clase es encapsular la complejidad, en
+Java existen mecanismos para ocultar la complejidad de los detalles de la implementación
+dentro de la clase.
+
+En resumen "sólo me importa lo que puede hacer la clase, no cómo lo hace".
+
+La forma de ocultar esos detalles de implementación es a través de los modificadores
+de acceso.
+
+#### Modificadores de acceso
+Los modificadores de accceso determinan a que atributos o métodos se pueden acceder
+y a través de quien. La **clase debe** definir cuál es la data y métodos que **quiere exponer**
+y cuál es la data y métodos que **quiere ocultar**.
+
+Recordando los respectivos modificadores de acceso:
+
+![Clases Vs Objetos](./Img/acceso.png)
+
+- El modificador **default** permite el acceso siempre y cuando los solicitantes se 
+encuentren en el mismo paquete.
+
+- El modificador **protected** permite acceso siempre y cuando los solicitantes se encuentren
+en el mismo paquete y a cualquier subclase incluso cuando no se encuentren en el mismo paquete.
+
+### Getter and Setters
+
+### Conversión automática de tipo
+
+### == Vs object1.equals(object2) // instanceof
+
+### Modificador final
+
+### Modificador Static
+
+#### Variables estáticas
+
+#### Métodos estáticos
+
+## Introducción al manejo de colecciones
+
 
 ### Clase Scanner
 Scanner es una clase de Java que define propiedades y métodos (obviamente). Usamos ésta clase para crear objetos de tipo entrada de datos (Pedir datos al usuario). Para crear
