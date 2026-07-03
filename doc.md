@@ -53,7 +53,7 @@ public class Estudiante {
 El nombre de la clase siempre irá en **PascalCase**. Siempre y cuando **exista una clase
 con visibilidad pública, las demás deberán de ser del tipo default o privadas**.
 
-### Tipos de visibilidades
+#### Tipos de visibilidades
 Cómo las demas clases ven a una clase.
 - Public: Lo ve cualquier clase del proyecto (Cualquier carpeta).
 - Protected: Lo ven las clases de la misma carpeta y sus hijas (Herencia).
@@ -65,6 +65,8 @@ Aunque en la práctica no es "sólo ver" la clase sino mas bien instanciarla.
 ### Sobre clases privadas
 Existen clases privadas tanto dentro de la clase pública como dentro de una clase con visibilidad por defecto. No existen clases privadas fuera de la clase pública (No tendría sentido ocultarse de nadie).
 
+
+### Cómo crear clases
 Con esto podemos escribir el siguiente código y note que, a priori, no daría error.
 ```Java
 // Nombre archivo: carro.java 
@@ -101,7 +103,7 @@ public static void main(String[] args)
 
 Cabe aclarar que éste método **siempre** es público.
 
-### Ejmplo práctico de una clase
+#### Ejemplo práctico de una clase
 ```Java
 // Nombre archivo: Main.java
 
@@ -131,16 +133,43 @@ public class Main {
 La estructura para delcarar una variable es la siguiente:
 ```Java
 // nombre archivo: Main.java
-public class Main{
+public class Main {
   modificadorTipo nombreVariable; // el nombre va en camelCase
 }
 ```
 
-#### Tipos de modificadores en variables
+#### Tipos de modificadores en variables (Igual que en las clases)
 - Private: Sólo la misma clase puede acceder a ella (dentro de sus respectivos {}).
 - Default: Sólo lo ven las clases que comparten la misma carpeta.
 - Protected: Lo mismo que el default inclyendo a las subclases.
 - Public: Vista general, todos pueden ver la variable y manipularla.
+
+### Declaración de métodos
+Los métodos son simplemente las funciones que existen dentro de una clase, que
+pertenecen a un objeto en particular. Solemos decir que los métodos de un objeto
+son las acciones que puede realizar.
+
+La estructura para delcarar un método es la siguiente:
+```Java
+// nombre archivo: Main.java
+public class Main {
+  // code
+
+  modificador tipo nombreMetodo(parameter-list) {
+    // code
+  }
+}
+```
+
+#### Tipos de datos de un método 
+Con el **tipo** nos referimos al dato que retornará la función. Por ejemplo,
+si quisieramos sumar números, entonces la función tendría que retornar un número
+(entero o decimal), también pueden retornar objetos. Pueden haber casos en los 
+que queremos que una función no retorne nada, por lo que usamos la keyword **void**.
+
+### Ubicación del proyecto Java en código (packpage)
+
+
 
 ### 1. Packpage
 
@@ -169,40 +198,9 @@ sc.nextInt();
 
 
 
-## Nociones de java
-- Todo código en Java vive en una clase (No puede estar suelta como en python).
-
-- La JVM siempre buscará la función principal Main dentro de la clase principal.
-
 - Static indica que la función o la variable siempre será la misma para todas las
   instancias de ese objeto. Todo objeto instanciado siempre se definirá de sus 
   métodos estáticos.
 
 - Cada vez que ejecutamos código en la terminal, la JVM instancia un objeto de 
   éste, pero sólo lee el Main del objeto además de sus variables estáticas.
-
-
-Codigo Taller
-public static void main(String[] args) {
-        
-        // Construir un arreglo vacío para diez valores enteros
-        int[] arreglo = new int[10];
-        
-        System.out.println("La longitud del arreglo es:  " + arreglo.length);
-        
-        // Asignar valores generados por el usuario en cada campo
-        Scanner sc = new Scanner(System.in);
-        
-        for (int i = 0; i < arreglo.length; i++){
-            System.out.println("Ingrese el elemento " + i + " del arreglo");
-            arreglo[i] = sc.nextInt();
-            
-            if (arreglo[i] > 5) {
-                arreglo[i] = 100;
-            }
-            
-            System.out.println("Arreglo en la posición " + i + " es " + arreglo[i]);
-        }
-        
-        sc.close();
-    }
