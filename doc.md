@@ -510,16 +510,117 @@ funciones (métodos) del objeto
 - Los **Getters** son métodos que retornan un valor en específico (Así obtenemos sólo datos que nos interesan).
 
 ### Conversión automática de tipo
+Java siempre busca una firma de método que coincida exactamente con la invocación
+del método. Solo después de que no encuentra una coincidencia exacta, Java intenta 
+conversiones de tipo automático para encontrar una definición de método que
+coincida con los tipos de la invocación del método.
 
-### == Vs object1.equals(object2) // instanceof
+En la conversión de tipos:
+
+![Clases Vs Objetos](./Img/xdProm.png)
+
+Por ejemplo:
+
+```Java
+public void mostrar(long x) {
+    System.out.println("Se ejecutó el método con LONG");
+}
+
+public void mostrar(double x) {
+    System.out.println("Se ejecutó el método con DOUBLE");
+}
+
+objeto.mostrar(5); // El número 5 por defecto es un 'int'
+
+// Salida: Se ejecutó el método con LONG
+```
+
+Así como sobrecargamos constructores, podemos sobrecargar métodos. Considere el
+método M, si desea sobrecargar M, debe mantener el nombre del método pero cambiar el tipo
+de dato en sus parámetros (Tipos de datos diferentes de M).
+Recuerde que la firma de un método se conforma por su nombre y sus parámetros.
+
+### == Vs object1.equals(object2)
+Para comparar valores de variables, tenemos 2 opciones. Normalmente
+si los datos que deseamos comparar con primitivos, entonces usamos **==**.
+Ahora bien, si deseamos comparar el contenido de objetos, entonces usamos
+el método **.equals()**.
+
+```Java
+public class Ejercicio2 {
+  public static void main(String[] args){
+    String a = new String("java");
+    String b = new String("java");
+    String c = a;
+
+    System.out.println("a==b "+(a==b)); //false
+    System.out.println("a==c "+(a==c)); //true
+    System.out.println("a.equals(b) "+(a.equals(b))); //true
+    System.out.println("a.equals(c) "+(a.equals(c))); //true
+  }
+}
+```
+
+Es posible reescribir el método boolean, su firma es la siguiente:
+```Java
+public boolean equals(Object obj){
+  //contenido
+}
+```
 
 ### Modificador final
+La keyword especial **final** se usa en Java para decir que el valor de una
+variable no va a cambiar una vez que esta es inicializada. Sólo puede ser 
+asignada una vez (Al declararse). Es decir:
+
+- **En datos primitivos**: Luego de final, no se puede modificar el dato almacenado en la 
+variable (Se queda como constante).
+
+- **En objetos**: Luego de final, se puede modificar el estado del objeto (Atributos) pero
+no su referencia. 
+
+- **En métodos**: Luego de final, en caso de que una clase herede esa clase, no será
+posible sobreescribir el método.
+
+- **En clases**: Luego de final, no será posible heredar la clase.
 
 ### Modificador Static
+Permite usar atributos y métodos sin necesidad de crear una instancia de una clase C. 
+Cuando se declara un método/variable con static, dichos métodos/variables dejan de pertenecer
+a objetos individuales (No son variables de instancia) y pasan a pertenecer a la clase en 
+general.
 
-#### Variables estáticas
+#### Variables 
+Una variable estática es una variable que le pertenece a la clase como un todo
+y no solo a un objeto (No cambia su valor dependiendo de la instancia). Es decir, hay
+una única copia de las variables estáticas que es compartida por todos los
+objetos de la clase.
+
+Para declarar variables estáticas:
+```Java
+public class A{
+  modificador-acceso static Type name;
+}
+```
+
+Cabe aclarar que una variable public static se puede modificar en otras clases (compartido pero modificable).
 
 #### Métodos estáticos
+Normalmente designamos como estáticos a los métodos que no realizan ninguna acción 
+sobre un objeto ó métodos que realizan simple cálculos matemáticos.
+
+Por ejemplo: 
+
+```Java
+public class Alumno {
+    private static int contadorAlumnos = 0;
+
+    // Método estático para consultar el total global sin instanciar alumnos
+    public static int getContadorAlumnos() {
+        return contadorAlumnos;
+    }
+}
+```
 
 ## Introducción al manejo de colecciones
 
