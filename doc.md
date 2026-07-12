@@ -590,7 +590,7 @@ Cuando se declara un método/variable con static, dichos métodos/variables deja
 a objetos individuales (No son variables de instancia) y pasan a pertenecer a la clase en 
 general.
 
-#### Variables 
+#### Variables estáticas
 Una variable estática es una variable que le pertenece a la clase como un todo
 y no solo a un objeto (No cambia su valor dependiendo de la instancia). Es decir, hay
 una única copia de las variables estáticas que es compartida por todos los
@@ -622,7 +622,125 @@ public class Alumno {
 }
 ```
 
+Así, no es posible hacer referencia a this en un método estático. **this** implica 
+que te estás refiriendo a una variable de instancia, la cual puede ser variable (Rompe
+la definición de concepto estático).
+
+
 ## Introducción al manejo de colecciones
+### Arreglos de una dimensión
+Es una estructura de datos que permite almacenar un conjunto de datos de un **mismo tipo**.
+Al declarar el arreglo siempre debemos de especificar su tamaño. Cabe aclarar que los arreglos
+son **objetos**.
+
+Para declarar arreglos, consideramos la siguiente sintaxis:
+```Java
+// Dejándola vacía
+Tipo_de_variable[] Nombre_del_array = new Tipo_de_variable[dimensión]; // Caso 1
+
+// Asignando elementos
+Tipo_de_variable[] Nombre_del_array = {dato1, dato2, ..., daton};
+```
+
+Si dejamos vacío el arreglo (Observe **caso 1**), dependerá del tipo de dato
+para los valores por defecto en el arreglo.
+Conforme al tipo de dato el arreglo puede ser: 0, '\u0000', false o null.
+
+La **dimensión** podría considerarla como la longitud de la lista.
+
+Por ejemplo:
+```Java
+char s[]; 
+int iArray[];
+char[] s;  
+int[] iArray;
+
+
+// o también
+int[] numeros = new int[4];
+
+int numeros[] = {2, 4, 6, 8}; 
+```
+
+Los tipos de datos válidos en los arreglos son los siguientes:
+```Java
+byte[ ] edad = new byte[4];
+short[ ] edad = new short[4];
+int[ ] edad = new int[4];
+long[ ] edad = new long[4];
+float[ ] estatura = new float[3];
+double[ ] estatura = new double[3];
+boolean[ ] estado = new boolean[5];
+char[ ] sexo = new char[2];
+String[ ] nombre = new String[2];
+```
+
+Luego de declarar arreglos, podemos acceder a sus elementos mediante sus índices.
+
+Por ejemplo:
+```Java
+double[] values = {1, 2, 3, 4, 5, 6};
+System.out.println(values[5])
+// Salida: 6
+```
+
+#### Propiedad lenght
+Si deseamos conocer la longitud de un arreglo. Es decir, cuantos elementos
+existen dentro del arreglo, usamos la propiedad de los arreglos **lenght**.
+```Java
+// Considere el arreglo numeros
+x = numeros.lenght; 
+```
+
+### Método Split de los String
+El método split retorna un arreglo de tipo String. Por ejemplo:
+```Java
+String email = "espolads@espol.edu.ec";
+String[] partes = email.split("@");
+System.out.println(partes[0]); // Salida: espolads
+System.out.println(partes[1]); // Salida: espol.edu.ec
+```
+
+### Arreglos de dos dimensiones (Matrices)
+Es una estructura de datos que permite almacenar un conjunto de datos de un **mismo tipo**.
+A diferencia de los arreglos en una dimensión, con los arreeglos de dos dimensiones tenemos
+2 dimensiones, **filas y columnas**.
+
+La sintaxis para declarar matrices es la siguiente:
+```Java
+// Dejándola vacía
+Tipo_de_variable[] Nombre_de_matriz = new Tipo_de_variable[filas][columnas]; // Caso 1
+
+// Asignando elementos
+Tipo_de_variable[] Nombre_del_array = {{dato1, ..., daton}, ..., {{dato1, ..., daton}}};
+```
+
+Si dejamos vacío la matriz (Observe **caso 1**), dependerá del tipo de dato
+para los valores por defecto en la matriz.
+Conforme al tipo de dato el arreglo puede ser: 0, '\u0000', false o null.
+
+#### Propiedad lenght en matrices
+De una matrizz, es posible determinar su cantidad de filas y columnas. Por ejemplo
+```Java 
+int filas = matriz.lenght;
+
+int columnas = matriz[0].lenght;
+```
+
+### Loop For mejorado
+En lugar de tener un for anidado para leer cada elemento en una matriz, usamos
+el lopp for mejorado. Su sintaxis es la siguiente:
+
+```Java
+for (typeName variable : collection){
+  statements;
+}
+```
+
+Con esto podemos acceder a cada valor de cada elemento en la matriz pero 
+**NO PODEMOS** modificar sus elementos (**Es solo lectura**).
+
+### Clases Wrappers
 
 
 ### Clase Scanner
