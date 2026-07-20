@@ -843,6 +843,23 @@ Con esto podemos acceder a cada valor de cada elemento en la matriz pero
 
 ### Clases Wrappers
 
+### Manipulación de datos
+Para leer datos de una cierta fuente de datos, Java dispone de **InputStream**
+**OutputStream** . La entrada y salida (E/S) en java se basa en el concepto de
+flujo (stream).
+
+Existen 2 tipos de flujos:
+- **InputStream: leer datos de una fuente.**
+- **OutputStream: escribir datos a un destino.**
+
+El manejo de los flujos se lo realiza a través de los paquetes **java.io** y **java.nio**.
+
+Insertar imagen (Diapositiva 6)
+
+En Java, cada archivo es un flujo de bytes. Aunque cada sistema operativo proporciona un
+mecanismo para determinal el fin de un archivo.
+
+
 
 ### Clase Scanner
 Scanner es una clase de Java que define propiedades y métodos (obviamente). Usamos ésta clase para crear objetos de tipo entrada de datos (Pedir datos al usuario). Para crear
