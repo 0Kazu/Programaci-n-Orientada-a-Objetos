@@ -859,6 +859,103 @@ Insertar imagen (Diapositiva 6)
 En Java, cada archivo es un flujo de bytes. Aunque cada sistema operativo proporciona un
 mecanismo para determinal el fin de un archivo.
 
+/////
+package com.taller;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class LecturaTexto {
+
+    public static void main(String[] args) {
+
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        try {
+            System.out.println("--- Abriendo flujo de lectura ---");
+
+            fr = new FileReader("notas.txt");
+            br = new BufferedReader(fr);
+
+            String linea;
+            int contadorLineas = 0;
+
+            while ((linea = br.readLine()) != null) {
+                contadorLineas++;
+                System.out.println("Linea " + contadorLineas + ": " + linea);
+            }
+
+        } catch (IOException e) {
+            System.err.println("Error al procesar el archivo: " + e.getMessage());
+
+        } finally {
+            try {
+                if (br != null)
+                    br.close();
+
+                if (fr != null)
+                    fr.close();
+
+                System.out.println("--- Flujo cerrado de forma segura ---");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+package com.taller;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class EscrituraTexto {
+
+    public static void main(String[] args) {
+        try (FileWriter fw = new FileWriter("bitacora.txt", true);
+             BufferedWriter bw = new BufferedWriter(fw)) {
+
+            System.out.println("Escribiendo datos en la bitácora...");
+
+            bw.write("Puedo escribir los versos más tristes esta noche.\r\n" + //
+                                "Se va con algo mío la tarde que se aleja;\r\n" + //
+                                "mi dolor de vivir es un dolor de amar;\r\n" + //
+                                "y al son de la garúa, en la antigua calleja,\r\n" + //
+                                "me invade un infinito deseo de llorar.");
+            bw.newLine();
+            bw.newLine();
+            
+            bw.write("Que son cosas de niño, me dices; quién me diera\r\n" + //
+                                "tener una perenne inconsciencia infantil;\r\n" + //
+                                "mi dolor de vivir es un dolor de amar;\r\n" + //
+                                "ser del reino del día y de la primavera,\r\n" + //
+                                "del ruiseñor que canta y del alba de Abril.");
+            bw.newLine();
+            bw.newLine();
+            
+            bw.write("¡Ah, ser pueril, ser puro, ser canoro, ser suave;\r\n" + //
+                                "trino, perfume o canto, crepúsculo o aurora\r\n" + //
+                                "mi dolor de vivir es un dolor de amar;\r\n" + //
+                                "como la flor que aroma la vida y no lo sabe,\r\n" + //
+                                "como el astro que alumbra las noches y lo ignora!");
+            bw.newLine();
+            bw.newLine();
+
+            bw.write("Estado: Excepciones y Archivos explicados con éxito.");
+            bw.newLine();
+
+            System.out.println("¡Escritura exitosa! Verifica el archivo 'bitacora.txt'.");
+
+        } catch (IOException e) {
+            System.err.println("Ocurrió un error en la escritura: " + e.getMessage());
+        }
+    }
+}
+/////
 
 
 ### Clase Scanner
