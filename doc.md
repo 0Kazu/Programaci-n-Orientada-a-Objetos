@@ -873,7 +873,30 @@ de datos:
 -  Cerrar el flujo de datos.
 
 ### Paquete io (Lectura de archivos de texto)
+La clase Reader es la clase abstracta de la cual heredan todas las clases concretas que se utilizan
+para leer información en forma textual.
+
 ![InputStream y OutputStream](./Img/Reader.png)
+
+De reader, obtenemos:
+- **InputStreamReader**: Clase que representa una conexión entre un stream de bytes y un stream de
+caracteres.
+
+- **FileReader**: clase para leer archivos de texto usando charset por defecto del sistema operativo.
+
+- **BufferedReader**: lee el texto de un flujo de caracteres con eficacia (los caracteres se almacenan en
+búfer para evitar la lectura frecuente del flujo subyacente) y proporciona un método conveniente para leer una línea de texto: **readLine()**.
+
+#### Métodos de la clase Reader
+- **read()**: lee un caracter.
+
+- **read(char[])**: lee un arreglo de
+caracteres.
+
+- **skip(long)**: se salta algunos
+caracteres.
+
+- **close()**: cierra el flujo de datos.
 
 /////
 package com.taller;
