@@ -51,14 +51,14 @@ Es la capacidad de que un mismo método o instrucción se comporte de manera dif
 Ahora bien, necesitamos un lenguaje para poder aplicar este  paradigma. Por lo que
 procederemos a aprender sobre Java.
 
-## Introducción a Java
+# Introducción a Java
 Java es un lenguaje de alto nivel, multiplataforma y orientado a objetos. 
 Lo primero que estudiaremos serán los tipos de datos.
 
-### Tipos de datos 
+## Tipos de datos 
 Un tipo de dato es la especificación de un dominio (rango de valores) de un conjunto válido. En Java existen 8 tipos de datos, llamados primitivos.
 
-#### Datos primitivos
+### Datos primitivos
 
 Tipos de datos *Numéricos*:
 - Byte: valor entero que pertenece al intervalo [-128, 127].
@@ -79,17 +79,17 @@ Tipos de datos *caracter*:
 
 - Boolean: Valores de verdadero o falso (Lógica proposicional).
 
-#### Datos no primitivos (Objetos)
+### Datos no primitivos (Objetos)
 - String: Conjunto de datos tipo Char (Cadenas de texto).
 
 - Scanner: Leer entrada de datos por teclado.
 
 - Arraylist: Creación de arreglos dinámicos.
 
-### Operadores en Java
+## Operadores en Java
 Existen 5 tipos de operadores en Java.
 
-#### Operadores ariméticos
+### Operadores ariméticos
 |Operador      |Símbolo       |
 |--------------|--------------|
 |     ++     |Operador de incremento, utilizado para incrementar el valor en 1.|
@@ -103,7 +103,7 @@ el resultado y luego se incrementa /decrementa.
 
 - Ejemplo de expresiones: ++a, a++, --a, --a.
 
-#### Operadores Unarios
+### Operadores Unarios
 Los operadores Unarios sólo necesitan un operando.
 
 |Operador      |Descripción       |
@@ -118,26 +118,26 @@ Los operadores Unarios sólo necesitan un operando.
 | Or (Dos barras verticales) | Operador disyunción inclusiva       |
 | ! | Operador negación        |
 
-### Comentarios en el código
-#### Código de una sola línea
+## Comentarios en el código
+### Código de una sola línea
 ```Java
 // Éste es un comentario de una sola línea
 ```
 
-#### Código multilínea 
+### Código multilínea 
 ```Java
 /* Ejemplo de comentarios
 *Este es un comentario multilínea
 */
 ```
 
-### Sobre escribir como en python (De la nada)
+## Sobre escribir como en python (De la nada)
 Primero que todo, en Java, **Nada puede existir fuera de una clase**. Todas las variables
 (atributos) y funciones (métodos) deben de estar en una clase, de lo contrario, no existe
 y el fichero no se podría compilar. Esto es debido a que java es un lenguaje orientado a 
 objetos (Todo existe solo con una clase y nada existe sin una).
 
-### Sobre cómo crear una plantilla (Clase)
+## Sobre cómo crear una plantilla (Clase)
 La estructura para crear una clase siempre será la siguiente:
 ```Java
 visibilidad class NombreDeClase{
@@ -154,7 +154,7 @@ public class Estudiante {
 El nombre de la clase siempre irá en **PascalCase**. Siempre y cuando **exista una clase
 con visibilidad pública, las demás deberán de ser del tipo default**.
 
-#### Tipos de visibilidades
+## Tipos de visibilidades
 Cómo las demas clases ven a una clase.
 - Public: Lo ve cualquier clase del proyecto (Cualquier carpeta).
 - Protected: Lo ven las clases de la misma carpeta y sus subclases (Herencia).
@@ -239,13 +239,13 @@ public class Main {
 }
 ```
 
-#### Tipos de modificadores en variables (Igual que en las clases)
+## Tipos de modificadores en variables (Igual que en las clases)
 - Private: Sólo la misma clase puede acceder a ella (dentro de sus respectivos {}).
 - Default: Sólo lo ven las clases que comparten la misma carpeta.
 - Protected: Lo mismo que el default inclyendo a las subclases.
 - Public: Vista general, todos pueden ver la variable y manipularla.
 
-### Declaración de métodos
+## Declaración de métodos
 Los métodos son simplemente las funciones que existen dentro de una clase, que
 pertenecen a un objeto en particular. Solemos decir que los métodos de un objeto
 son las acciones que puede realizar.
@@ -264,7 +264,7 @@ public class Main {
 }
 ```
 
-#### Firma de un método
+### Firma de un método
 La firma de un método es cómo Java ve al método al momento
 de guardar espacio en la memoria. Por ejemplo:
 
@@ -277,13 +277,13 @@ public int acelerar(int velocidadInicial, String tipoTerreno) {
 
 Su firma es: acelerar(int, String)
 
-#### Tipos de datos de un método 
+### Tipos de datos de un método 
 Con el **tipo** nos referimos al dato que retornará la función. Por ejemplo,
 si quisieramos sumar números, entonces la función tendría que retornar un número
 (entero o decimal), también pueden retornar objetos. Pueden haber casos en los 
 que queremos que una función no retorne nada, por lo que usamos la keyword **void**.
 
-### Ubicación del proyecto Java en código (package)
+## Ubicación del proyecto Java en código (package)
 Al momento de crear un archivo Java, con el propósito de desarrollar una solución, es recomendable
 trabajar esa solución como un proyecto. Ahora bien, la sintaxis para indicarle a Java el
 "proyecto" en el que "vive el fichero .java" es la siguiente:
@@ -310,7 +310,7 @@ public class Main {
 }
 ```
 
-### Llamar a código externo (import)
+## Llamar a código externo (import)
 Si queremos usar código que está en otra carpeta (diferente paquete), usamos
 la keyword reservada **import**, de esta forma:
 
@@ -327,7 +327,7 @@ public class Main {
 
 
 
-### Creación de objetos en Java
+## Creación de objetos en Java
 Dado que ya tenemos el lugar para escribir código, veamos cómo podemos
 crear objetos (instanciar clases). La sintaxis es la siguiente: 
 
@@ -343,7 +343,7 @@ public class Main {
 
 Así, hacemos uso de la keyword reservada **new**.
 
-### Acceder a las propiedades y métodos de un objeto
+## Acceder a las propiedades y métodos de un objeto
 Lo más común en el paradigma de la programación orientada a objetos es acceder a
 éstos y modificar sus atributos o comportamientos. Nos valemos de la siguiente sintaxis ".":
 
@@ -360,7 +360,7 @@ public class Main {
 }
 ```
 
-### Valor vs Referencia
+## Valor vs Referencia
 Los tipos de datos que encontramos en Java son de 2 tipos: primitivos y de
 referencia. 
 
@@ -398,18 +398,18 @@ o pk1, estamos afectando a ambos objetos. De hecho:
 
 ![Clases Vs Objetos](./Img/datovsreferencia4.png)
 
-### Variables de Instancia vs Variables Locales
-#### Variables locales
+## Variables de Instancia vs Variables Locales
+### Variables locales
 - Es una variable declarada dentro de la definición de un método o función.
 
 - Deben ser inicializadas antes de ser utilizadas (No puede haber un int numeroSuerte; sino int numeroSuerte = 1;)
 
-#### Variables de Instancia
+### Variables de Instancia
 - Es la variable definida para todas las intancias de una clase (Estado del objeto).
 
 - Toman un valor predeterminado si no son inicializadas.
 
-#### Valor predeterminado para variables de instancia
+### Valor predeterminado para variables de instancia
 - **Objetos** -> null
 
 - **int, byte, long** -> 0
@@ -420,7 +420,7 @@ o pk1, estamos afectando a ambos objetos. De hecho:
 
 - **boolean** -> false
 
-### Tipo de dato null
+## Tipo de dato null
 Es un valor espacial que se puede asignar a cualquier tipo de referencia. Se usa
 para indicar que una variable de referencia **no apunta a un objeto aún**.
 
@@ -430,7 +430,7 @@ sino primitivo.
 Como en Unity con C#, si queremos validar que un objeto no es nulo, entonces se verifica
 la proposición **objectName != null** o su equivalente sin negación **objectName == null**.
 
-### Constructores
+## Constructores
 Los constructores son muy importantes al momento de llamar a un objeto. Cuando nosotros
 usamos la keyword **new**: ```Pokemon pk1 = new Pokemon();```; la parte de ```Pokemon()```
 hace referencia a su constructor.
@@ -519,7 +519,7 @@ parámetros y tiene modificador de acceso público.
 
 - Si ya existe un constructor entonces Java no considerará el predeterminado.z
 
-### Keyword **this**
+## Keyword **this**
 "this" es literalmente una referencia al objeto actual. Se usa esta palabra reservada
 cada vez que tengamos que hacer referencia al objeto que invoca al método.
 
@@ -560,7 +560,7 @@ public class Rectangulo {
 }
 ```
 
-### Manejo de memoria en Java
+## Manejo de memoria en Java
 Existen dos regiones de memoria, tal como se muestra a continuación:
 
 ![Clases Vs Objetos](./Img/stackHeap.png)
@@ -570,8 +570,8 @@ Existen dos regiones de memoria, tal como se muestra a continuación:
 - **Heap**: Usada para almacenar los objetos (referencias).
 
 
-## Pilares de POO aplicados a Java
-### Encapsulamiento
+# Pilares de POO aplicados a Java
+## Encapsulamiento
 Es el mecanismo que combina la data y al funcionalidad asociada a ella en una
 sola unidad (clase). Ya que el propósito de la clase es encapsular la complejidad, en
 Java existen mecanismos para ocultar la complejidad de los detalles de la implementación
@@ -582,7 +582,7 @@ En resumen "sólo me importa lo que puede hacer la clase, no cómo lo hace".
 La forma de ocultar esos detalles de implementación es a través de los modificadores
 de acceso.
 
-#### Modificadores de acceso
+### Modificadores de acceso
 Los modificadores de accceso determinan a que atributos o métodos se pueden acceder
 y a través de quien. La **clase debe** definir cuál es la data y métodos que **quiere exponer**
 y cuál es la data y métodos que **quiere ocultar**.
@@ -728,8 +728,8 @@ que te estás refiriendo a una variable de instancia, la cual puede ser variable
 la definición de concepto estático).
 
 
-## Introducción al manejo de colecciones
-### Arreglos de una dimensión
+# Introducción al manejo de colecciones
+## Arreglos de una dimensión
 Es una estructura de datos que permite almacenar un conjunto de datos de un **mismo tipo**.
 Al declarar el arreglo siempre debemos de especificar su tamaño. Cabe aclarar que los arreglos
 son **objetos**.
@@ -843,7 +843,8 @@ Con esto podemos acceder a cada valor de cada elemento en la matriz pero
 
 ### Clases Wrappers
 
-### Manipulación de datos
+# Manipulación de datos
+## Conceptos de flujos de entrada y salida
 Para leer datos de una cierta fuente de datos, Java dispone de **InputStream** y
 **OutputStream** . La entrada y salida (Input/Output) en java se basa en el concepto de
 flujo (stream).
@@ -857,10 +858,21 @@ Existen 2 tipos de flujos:
 
 El manejo de los flujos se lo realiza a través de los paquetes **java.io** y **java.nio**.
 
-Insertar imagen (Diapositiva 6)
+![InputStream y OutputStream](./Img/POODescripcion.png)
 
-En Java, cada archivo es un flujo de bytes. Aunque cada sistema operativo proporciona un
-mecanismo para determinal el fin de un archivo.
+## Lectura y escritura de archivos
+En Java, cada archivo es un flujo de bytes. Cada sistema operativo proporciona un
+mecanismo para determinar el fin de un archivo. un programa en JAVA que procesa
+un flujo de bytes recibe una notificación del sistema operativo cuando el programa
+llega al fin del flujo.
+
+Los flujos en la lectura o escritura de archivos funcionan igual independiente de la plataforma
+de datos:
+- Abrir el flujo de datos.
+-  Mientras exista más información (leer o escribir ) los datos.
+-  Cerrar el flujo de datos.
+
+### Paquete io (Lectura de archivos de texto)
 
 /////
 package com.taller;
