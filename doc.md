@@ -873,6 +873,7 @@ de datos:
 -  Cerrar el flujo de datos.
 
 ### Paquete io (Lectura de archivos de texto)
+![InputStream y OutputStream](./Img/Reader.png)
 
 /////
 package com.taller;
