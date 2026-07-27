@@ -844,13 +844,16 @@ Con esto podemos acceder a cada valor de cada elemento en la matriz pero
 ### Clases Wrappers
 
 ### Manipulación de datos
-Para leer datos de una cierta fuente de datos, Java dispone de **InputStream**
-**OutputStream** . La entrada y salida (E/S) en java se basa en el concepto de
+Para leer datos de una cierta fuente de datos, Java dispone de **InputStream** y
+**OutputStream** . La entrada y salida (Input/Output) en java se basa en el concepto de
 flujo (stream).
 
+El flujo es una secuencia ordenada de datos que tiene una fuente (flujo de
+entrada) o un destino (flujo de salida).
+
 Existen 2 tipos de flujos:
-- **InputStream: leer datos de una fuente.**
-- **OutputStream: escribir datos a un destino.**
+- **InputStream**: leer datos de una fuente.
+- **OutputStream**: escribir datos a un destino.
 
 El manejo de los flujos se lo realiza a través de los paquetes **java.io** y **java.nio**.
 
