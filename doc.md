@@ -898,6 +898,37 @@ caracteres.
 
 - **close()**: cierra el flujo de datos.
 
+### FileReader
+FileReader es la librería que usamos para leer archivos de texto. Sin embargo, la
+declaración:
+```Java
+FileReader(String filePath)
+FileReader(File fileObj)
+```
+Al tratar de leer un fichero, podría retornar una excepción **FileNotFoundException**. 
+Por lo cual, optamos por un manejo de excepciones con try-catch.
+
+#### Ejemplo
+```Java
+import java.io.FileReader;
+import java.io.IOException;
+
+public class TextFileReadingExample1 {
+  public static void main(String[] args) {
+    try {
+      FileReader reader = new FileReader("MyFile.txt");
+      int character;
+      while ((character = reader.read()) != -1) {
+        System.out.print((char) character);
+      }
+      reader.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+}
+```
+
 /////
 package com.taller;
 
