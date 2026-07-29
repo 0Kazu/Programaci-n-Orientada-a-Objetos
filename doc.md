@@ -1367,4 +1367,20 @@ public class Main {
 }
 ```
 
+Los ENUMs con los que cuenta StandardOption son:
 
+- **APPEND**: Si el archivo existe, escribe al final del contenido existente sin borrar nada de lo anterior.
+
+- **CREATE**: Crea el archivo si no existe. Si el archivo ya existe, simplemente lo abre normalmente.
+
+- **CREATE_NEW**: Crea un archivo nuevo, pero si el archivo ya existe, lanza una excepción.
+
+- **TRUNCATE_EXISTING**: Si el archivo ya existe y se abre para escribir, borra todo su contenido.
+
+- **DELETE_ON_CLOSE**: Borra el archivo en cuanto el programa lo cierra.
+
+- **READ**: Abre el archivo únicamente para lectura.
+
+- **WRITE**: Abre el archivo para escritura.
+
+Es posible combinar estás opciones al llamar a Files.Write().
