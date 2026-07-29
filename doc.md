@@ -1384,3 +1384,50 @@ Los ENUMs con los que cuenta StandardOption son:
 - **WRITE**: Abre el archivo para escritura.
 
 Es posible combinar estás opciones al llamar a Files.Write().
+
+# Serialización y deserialización de objetos
+La Serialización es el proceso de tomar un objeto vivo en la memoria RAM y "aplanarlo" o convertirlo en una secuencia de bytes.
+
+Ésto es útil ya que los objetos en la memoria RAM desaparecen al apagar o cerrar la aplicación. Al convertir un objeto a una secuencia de bytes, es posible:
+
+- Guardarlo en el disco duro (en un archivo .dat o .ser) para recuperarlo después.
+
+- Enviarlo a través de la red a otro programa, servidor o base de datos.
+
+Cabe recalcar que las variables estáticas, dado que pertenecen a la clase en general y no a un objeto en particular, **no se pueden guardar al serializar**.
+
+## Interfaz Serializable
+Un objeto se puede serializar si implementa el interface Serializable. la interfaxe no declara ninguna función miembro, se trata de un interface vacío.
+
+### Ejemplo
+```Java
+import java.io.Serializable
+
+public class Student implements Serializable {
+  int id;
+  String name;
+  
+  public Student(int id, String name) {
+    this.id = id;
+    this.name = name;
+  }
+}
+
+## Clase ObjectOutputStream
+Es usada para escribir los datos primitivos y objetos a un OutputStream (Serialización). Sólo objetos que implementan Serializable pueden ser escritos a streams.
+
+la sintaxis del constructor de ObjectOutputStream es la siguiente:
+
+```Java
+public ObjectOutputStream(OutputStream out) throws IOException {}
+```
+
+**throws IOException** implica que, si al llamar al constructor algo sale mal, éste lanza una excepción que siempre se tendrá que controlar con un try-catch.
+
+Para escribir objetos en un fichero binario en Java se utiliza la clase ObjectOutputStream derivada de OutputStream.
+Un objeto ObjectOutputStream se crea a partir de un objeto Dile OutputStream asociado al fichero. Así:
+
+```Java
+
+```
+
