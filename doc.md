@@ -1412,6 +1412,7 @@ public class Student implements Serializable {
     this.name = name;
   }
 }
+```
 
 ## Clase ObjectOutputStream
 Es usada para escribir los datos primitivos y objetos a un OutputStream (Serialización). Sólo objetos que implementan Serializable pueden ser escritos a streams.
@@ -1428,6 +1429,35 @@ Para escribir objetos en un fichero binario en Java se utiliza la clase ObjectOu
 Un objeto ObjectOutputStream se crea a partir de un objeto Dile OutputStream asociado al fichero. Así:
 
 ```Java
+FileOutputStream fout = new FileOutputStream("f.ser"); // Capa 1: Apunta a un archivo
 
+ObjectOutputStream out = New ObjectOutputStream(fout); // Capa 2: Sabe convertir objetos a bytes
 ```
 
+FileOutputStream sólo sabe escribir bytes en un archivo (No sabe si es específicamente un objeto on fichero de bytes cualquiera). ObjectOutputStream es una capa envolvente que sí sabe traducir un objeto Java a Bytes, y luego usa el FileOutputStream de adentro para realmente escribirlos al disco.
+
+
+### Métodos
+- **writeObject(Object obj)**: Escribe el objeto específicado en el flujo de salida.
+
+- **flush()**: Descarga el flujo de salida actual.
+
+- **closet()**: Cierra el flujo de salida.
+
+
+#### Ejemplo
+```Java
+impot java.io.*
+
+class Persiste {
+  public static void main(String args[]) throws Exception {
+    Student s1 = new Student(211, "ravi");
+
+    FileOutputStream fout = new FileOutputStream("f.ser");
+    ObjectOutputStream out = new ObjectOutputStream(fout);
+
+    out.writeObject(s1);
+    out.flush();
+  }
+}
+```
