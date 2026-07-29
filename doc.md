@@ -1295,30 +1295,76 @@ La clase Files contiene una gran variedad de métodos que nos permite:
 
 - **Realizar operaciones de escritura y lectura** directamente.
 
+Siendo más específicos, los métodos son:
 
+- **Files.readAllLines(Path path, Charset cs)**: Lee todas las líneas de un archivo.
 
+- **Files.write(Path path, Iterable <? extends CharSequence > lines, Charset cs, OpenOption... options)**.
 
-
-
-
-
-
-
-### Clase Scanner
-Scanner es una clase de Java que define propiedades y métodos (obviamente). Usamos ésta clase para crear objetos de tipo entrada de datos (Pedir datos al usuario). Para crear
-una instancia de la clase Scanner en Java (Es decir, un objeto):
-
+### Ejemplo 1
 ```Java
-Scanner sc = new Scanner(System.in);
-sc.nextInt();
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
+public class Main {
+  public static void main(String[] args) {
+    Path wiki_path = Paths.get("C:/tutorial/wiki", "wiki.txt");
+
+    Charset charset = Charset.forName("ISO-8859-1");
+    try {
+      List<String> lines = Files.readAllLines(wiki_path, charset);
+
+      for (String line : lines) {
+        System.out.println(line);
+      }
+    } catch (IOException e) {
+      System.out.println(e);
+    }
+
+  }
+}
+```
+
+Los **Charsets** más comunes que existen son:
+
+- **ASCII**: Ocupa 7 bits y solo incluye el alfabeto inglés (sin tildes, sin ñ y sin ¿).
+
+- **ISO-8859-1 (Latin-1)**: Una extensión de ASCII de 8 bits que agrega caracteres del español
+y Europa occidental (como la ñ, á, é, ...).
+
+- **UTF-8**: Estandar universal en la web, sistemas operativos y Java.
+
+### Ejemplo 2
+```Java
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+
+public class Main {
+  public static void main(String[] args) {
+    Path myText_path = Paths.get("C:/tutorial/wiki", "wiki.txt");
+    Charset charset = Charset.forName("UTF-8");
+
+    ArrayList<String> lines = new ArrayList<>();
+
+    lines.add("\n");
+    lines.add("tutorial");
+
+    try {
+      Files.write(myText_path, lines, charset, StandardOpenOption.APPEND);
+    } catch (IOException e) {
+      System.err.println(e);
+    }
+  }
 }
 ```
 
 
-
-- Static indica que la función o la variable siempre será la misma para todas las
-  instancias de ese objeto. Todo objeto instanciado siempre se definirá de sus 
-  métodos estáticos.
-
-- Cada vez que ejecutamos código en la terminal, la JVM instancia un objeto de 
-  éste, pero sólo lee el Main del objeto además de sus variables estáticas.
