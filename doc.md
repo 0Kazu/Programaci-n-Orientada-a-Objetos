@@ -843,8 +843,7 @@ Con esto podemos acceder a cada valor de cada elemento en la matriz pero
 
 ### Clases Wrappers
 
-# Manipulación de datos
-## Conceptos de flujos de entrada y salida
+# Manipulación de datos - Conceptos de flujos de entrada y salida
 Para leer datos de una cierta fuente de datos, Java dispone de **InputStream** y
 **OutputStream** . La entrada y salida (Input/Output) en java se basa en el concepto de
 flujo (stream).
@@ -872,7 +871,9 @@ de datos:
 -  Mientras exista más información (leer o escribir ) los datos.
 -  Cerrar el flujo de datos.
 
-### Paquete io (Lectura de archivos de texto)
+# Paquete io
+## Paquete io (Lectura y escritura de archivos de texto)
+### Clase Reader (Lectura)
 La clase Reader es la clase abstracta de la cual heredan todas las clases concretas que se utilizan
 para leer información en forma textual.
 
@@ -899,7 +900,7 @@ caracteres.
 - **close()**: cierra el flujo de datos.
 
 ### FileReader
-FileReader es la librería que usamos para leer archivos de texto. Sin embargo, la
+FileReader es la librería que usamos para leer archivos de texto. Note que, la
 declaración:
 ```Java
 FileReader(String filePath)
@@ -929,9 +930,52 @@ public class TextFileReadingExample1 {
 }
 ```
 
-/////
-package com.taller;
+- **reader (FileReader)**: Representa el flujo del archivo "reader", mas no el fichero como tal.
 
+### BufferedReader
+A diferencia de FileReader, BufferedReader permite leer  texto
+de un inputStream de una forma eficiente.
+
+FileReader lee carácter por carácter pero BufferedReader lee bloques
+de caracteres rápidamente.
+
+```Java
+BufferedReader(Reader in)
+BufferedReader(Reader in, int sz)
+```
+
+Al tratar de leer un fichero, podría retornar una excepción **FileNotFoundException**. 
+Por lo cual, optamos por un manejo de excepciones con try-catch.
+
+#### Ejemplo 1
+```Java
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+
+public class TextFileReadingExample3 {
+  public static void main(String[] args) {
+    try {
+      FileReader in = new FileReader("MyFile.txt");
+      BufferedReader bufferedReader = new BufferedReader(in);
+
+      String line;
+
+      while ((line = bufferedReader.readLine()) != null) {
+        System.out.print(line);
+      }
+
+      bufferedReader.close();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+#### Ejemplo 2
+```Java
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -963,7 +1007,7 @@ public class LecturaTexto {
         } finally {
             try {
                 if (br != null)
-                    br.close();
+                    br.close(); // .close() tiende a errores
 
                 if (fr != null)
                     fr.close();
@@ -976,9 +1020,114 @@ public class LecturaTexto {
         }
     }
 }
+```
 
-package com.taller;
+### Clase Writer (Escritura)
+La clase Writer es la clase abstracta de la cual heredan todas las
+clases concretas que se utilizan para escribir información en forma textual.
 
+![InputStream y OutputStream](./Img/writter.jpeg)
+
+De Writer, obtenemos:
+- **OutputStreamWriter**: Clase que representa una conexión entre un stream de bytes y un stream de
+caracteres.
+
+- **FileWriter**: clase para escribir archivos de texto usando charset por defecto del sistema operativo.
+
+- **BufferedWriter**: Escribe el texto en un flujo de salida de caracteres, almacenando
+caracteres en búfer para proporcionar una escritura eficiente de caracteres individuales, arreglos
+y cadenas.
+
+
+#### Métodos de la clase Writer
+- **write(int)**: Escribe un caracter.
+
+- **write(char[])**: escribe un arreglo de
+caracteres.
+
+- **write(String)**: escribe un string.
+
+- **close()**: cierra el flujo de datos.
+
+### FileWriter
+FileWriter es la librería que usamos para escribir archivos de texto. Note que, la
+declaración:
+
+```Java
+FileWriter(String filePath) 
+FileWriter(String filePath, boolean append) 
+FileWriter(File fileObj)
+```
+
+- **append**: El parámetro append se refiere a la forma de sobreescribir 
+el documento: **true**: escribir lo nuevo al final; **false**: borrar todo (Sobrescribe).
+
+Si el fichero en filePath no se ha creado, FileWreater crea
+el fichero. Sin embargo, FileWriter puede retornar una excepción **FileNotFoundException**. 
+Por lo cual, optamos por un manejo de excepciones con try-catch.
+
+#### Ejemplo
+```Java
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class TextFileWritingExample1 {
+  public static void main(String[] args) {
+    try {
+      FileWriter writer = new FileWriter("MyFile.txt", true);
+      writer.write("Hello World");
+      writer.write("\r\n");   // write new line
+      writer.write("Good Bye!");
+      writer.close();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### BufferedWriter
+La diferencia entre BufferedWriter y FileWriter es equivalente a la diferencia
+entre BufferedReader y FileReader. BufferedWriter escribe texto en el fichero
+bloque por bloque (por lineas), mientras que FileWriter escribe carácter por carácter.
+
+```Java
+BufferedWriter(Writer out)
+BufferedWriter(Writer out, int sz)
+```
+
+Note que BufferedWriter puede retornar una excepción.
+Por lo cual, optamos por un manejo de excepciones con try-catch.
+
+#### Ejemplo 1
+```Java
+import java.io.BufferedWriter;
+import java.io.IOException;
+
+public class TextFileWritingExample2 {
+  public static void main(String[] args) {
+    try {
+      FileWriter out = new FileWriter("MyFile.txt", true);
+      BufferedWriter bufferedWriter = new BufferedWriter(out);
+
+      bufferedWriter.write("Hello World");
+      bufferedWriter.newLine();   // write new line
+      bufferedWriter.write("Good Bye!");
+
+      BufferedWriter.close();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    } finally {
+
+    }
+  }
+}
+```
+
+#### Ejemplo 2
+```Java
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -1025,7 +1174,134 @@ public class EscrituraTexto {
         }
     }
 }
-/////
+```
+
+## Paquete io (Lectura y escritura de archivos binarios)
+Dado que ya sabemos cómo leer y escribir en un fichero de texto, procederemos
+a modificar/leer archivos binarios. Las clases generales son **InputStream** y
+**OutputStream**.
+
+![InputStream y OutputStream](./Img/binariosEscrLect.jpeg)
+
+Con ficheros binarios nos referimos a imágenes, audio, video, etc...
+
+### FileInputStream
+FileInputStream es usada para leer datos binarios.
+
+#### Ejemplo
+```Java
+import java.io.FileInputStream;  
+
+public class DataStreamExample {  
+  public static void main(String args[]){    
+    try{    
+      FileInputStream fin = new FileInputStream("D:\\fichero_bin.ddr"); 
+
+      int i=0;    
+      while((i = fin.read())!=-1){    
+        System.out.print((char) i);    
+      }    
+
+      fin.close();    
+    } catch(Exception e)
+    {
+      System.out.println(e);
+    }    
+  }    
+}  
+```
+
+### FileOutputStream
+FileOutputStream es usada para escribir datos binarios.
+
+#### Ejemplo
+```Java
+import java.io.FileOutputStream;  
+
+public class FileOutputStreamExample {  
+  public static void main(String args[]){    
+    try{    
+      FileOutputStream fout = new FileOutputStream("D:\\fichero_bin.ddr");
+
+      String s = "Esto es una prueba para ficheros binariosssss";    
+      byte b[] = s.getBytes();  //converting string into byte array    
+
+      fout.write(b);    
+      fout.close();    
+      System.out.println("success...");
+          
+      } catch(Exception e)
+      {
+        System.out.println(e);
+      }    
+  }    
+}
+```
+
+# Paquete nio (Non-blocking)
+Ya habiendo tratado el paquete io, es hora de introducir a su evolución, el paquete nio.
+En el paquete java.io tradicional, cuando hacemos read() o write():
+
+- El hilo del programa se detiene por completo.
+
+- El programa se queda esperando pacientemente a que el disco duro lea los bytes.
+
+- Si el disco es lento o el archivo es gigante, el programa no puede hacer nada
+más mientras espera.
+
+Por otro lado, nio permite operaciones E/S rápidas y escalables tomando ventaja de los
+avances de E/S sin bloqueo en los sistemas operativos. Gracias 3 pilares fundamentales
+Buffer, Channel y Selector.
+
+Para el efecto, nio se basa en 3 clases (1 interfaz y 2 clases):
+
+- **Interface Path**: Abstracción de un archivo o directorio dentro de un 
+sistema de archivos.
+
+- **Clase Paths**: Clase que retorna el directorio -> Paths.get(String first, String... more).
+
+- **Clase Files**: Clase con los métodos ppara modificar sobre la ruta especificada.
+
+## Clase Paths
+Paths sirve para retornar el directorio limpio que apunta hacia un 
+fichero.
+
+### Ejemplo
+```Java
+// Estas dos llamadas son equivalentes 
+Path hosts1 = Paths.get("/etc/hosts"); 
+Path hosts2 = Paths.get("/etc", "hosts");
+
+// Ejemplo
+Path ruta = Paths.get("C:/usuarios/diego/documentos/archivo.txt");
+```
+
+Note que si llama a **Paths.get("/path1", ..., "pathn")** será equivalente a
+**Paths.get("/path1/.../pathn")**.
+
+
+## Clase Files
+La clase Files contiene una gran variedad de métodos que nos permite:
+
+- **Crear** archivos, carpetas y links simbólicos.
+
+- **Copiar**, **mover** y **borrar**.
+
+- **Consultar** atributos.
+
+- **Iterar** sobre un árbol del sistema de archivos.
+
+- **Obtener flujos** de lectura y escritura.
+
+- **Realizar operaciones de escritura y lectura** directamente.
+
+
+
+
+
+
+
+
 
 
 ### Clase Scanner
