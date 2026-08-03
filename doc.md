@@ -1,4 +1,4 @@
-# Programación Orientada a Objetos
+<img width="1069" height="322" alt="image" src="https://github.com/user-attachments/assets/749c968f-d69b-4059-92c7-3e8b7cdc235d" /># Programación Orientada a Objetos
 ## Bases de POO
 Luego de haber aprendido la programación estructural en fundamentos
 de programación, es hora de explorar de las diferentes formas que disponemos
@@ -1505,4 +1505,22 @@ guardados dentro del archivo coincidan con la estructura del objeto serializado.
 **ideal** en **código limpio** es usar f.ser o f.dat.
 
 En resumen:
+![Resumen](./Img/serDes.png)
+
+Cada archivo al ser seralizado guarda la **versión UID** actual de la clase. Así, cuando leamos
+el objeto serializado con **ObjectInputStream**, java va a comprar la versión UID actual de la clase
+con la versión UID que se guardó el archivo serializado. Si los UID no coinciden, Java retornará
+**InvalidClassException**.
+
+Podemos establecer "manualmente" la versión UID de la clase:
+
+```Java
+private static final long serialVersionUID = 8799656478674716638L;
+```
+
+
+
+
+
+
 
