@@ -1397,7 +1397,7 @@ La Serialización es el proceso de tomar un objeto vivo en la memoria RAM y "apl
 Cabe recalcar que las variables estáticas, dado que pertenecen a la clase en general y no a un objeto en particular, **no se pueden guardar al serializar**.
 
 ## Interfaz Serializable
-Un objeto se puede serializar si implementa el interface Serializable. la interfaxe no declara ninguna función miembro, se trata de un interface vacío.
+Un objeto se puede serializar si implementa el interface Serializable. la interface no declara ninguna función miembro, se trata de un interface vacío.
 
 ### Ejemplo
 ```Java
@@ -1420,6 +1420,9 @@ Es usada para escribir los datos primitivos y objetos a un OutputStream (Seriali
 la sintaxis del constructor de ObjectOutputStream es la siguiente:
 
 ```Java
+public ObjectOutputStream(OutputStream out);
+
+// El constuctor puede lanzar una IOException
 public ObjectOutputStream(OutputStream out) throws IOException {}
 ```
 
@@ -1440,9 +1443,9 @@ FileOutputStream sólo sabe escribir bytes en un archivo (No sabe si es específ
 ### Métodos
 - **writeObject(Object obj)**: Escribe el objeto específicado en el flujo de salida.
 
-- **flush()**: Descarga el flujo de salida actual.
+- **flush()**: "Descarga" el flujo de salida actual.
 
-- **closet()**: Cierra el flujo de salida.
+- **close()**: Cierra el flujo de salida.
 
 
 #### Ejemplo
@@ -1461,3 +1464,45 @@ class Persiste {
   }
 }
 ```
+
+## Clase ObjectInputStream
+Es usada para leer los objetos contenidos en un fichero binario que ha sido almacenado
+previamente por un **ObjectOutputStream** -> De igual forma que con **ObjectOutputStream**, **ObjectInputStream**
+depende de un **ObjectOutputStream**.
+
+la sintaxis del constructor de ObjectOutputStream es la siguiente:
+
+```Java
+ObjectInputStream(InputStream nombre);
+```
+
+El constructor puede **lanzar una IOException**.
+
+### Métodos
+- **readbject(Object obj)**: Devuelve el objeto del fichero (tipo Object).
+
+- Es necesario hacer un casting para guardarlo en una variable del tipo adecuado.
+
+- **close()**: Cierra el flujo de entrada.
+
+#### Ejemplo
+```Java
+import java.io.*;
+class Depersist{
+   public static void main(String args[])throws Exception{
+     ObjectInputStream in=new ObjectInputStream(new FileInputStream("f.txt"));
+     Student s=(Student)in.readObject();
+
+     System.out.println(s.id+" "+s.name);
+     in.close();
+  }
+}
+```
+
+Note que, no es necesario que f.txt sea f.ser. De hecho, Java no valida la extensión del archivo;
+Lo que a FileInputStream y ObjectInputStream les importa es que los bytes binarios
+guardados dentro del archivo coincidan con la estructura del objeto serializado. Sin embargo, lo
+**ideal** en **código limpio** es usar f.ser o f.dat.
+
+En resumen:
+
