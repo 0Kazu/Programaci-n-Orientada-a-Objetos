@@ -1518,6 +1518,31 @@ Podemos establecer "manualmente" la versión UID de la clase:
 private static final long serialVersionUID = 8799656478674716638L;
 ```
 
+### Modificador transient
+Si al serializar el objeto, deseamos que NO se guarde el tipo de dato de una variable
+específica, usamos la keyword especial **transient**.
+
+```Java
+public class Usuario implements Serializable {	
+ private String nombre;
+ private transient String password;
+}
+```
+
+- Si una clase implementa Serializable, todas sus subclases se podrán serializar también.
+- Si una clase tiene referencia a otra clase, esta debe ser serializable o el proceso no podrá realizarse.
+- Los miembros estáticos de la clase no se serializan (campos, atributos, métodos).
+
+# Tipo y manejo de excepciones
+Las excepciones son un mecanismo de control de errores en tiempo de ejecución. Así, podemos
+hacer que una aplicación continúe su ejecución si se produce un error. 
+
+En JAVA cuando se detecta un error, se crea un objeto de una clase especial (clase Exception), el cual incluye toda la información del problema, tal como el punto del programa donde se produjo, la causa del error, etc.
+
+Ahora bien, si se da una excepción, el objeto hace un **throw**, con la esperanza de que alguien lo atrape y decida como recuperarse del error. Si nadie lo atrapa, el programa termina, y en la consola de ejecución aparecerá toda la información contenida en el objeto que representaba el error.
+
+- **throw**: Estado en que el objeto lanza el error(excepción) que puede generar para que alguien atrape ese error
+y pueda solucionarlo, de tal forma que no se detenga la ejecución total del programa.
 
 
 
