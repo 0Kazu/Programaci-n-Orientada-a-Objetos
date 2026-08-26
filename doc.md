@@ -1,4 +1,5 @@
-<img width="1069" height="322" alt="image" src="https://github.com/user-attachments/assets/749c968f-d69b-4059-92c7-3e8b7cdc235d" /># Programación Orientada a Objetos
+<img width="1069" height="322" alt="image" src="https://github.com/user-attachments/assets/749c968f-d69b-4059-92c7-3e8b7cdc235d" />
+# Programación Orientada a Objetos
 ## Bases de POO
 Luego de haber aprendido la programación estructural en fundamentos
 de programación, es hora de explorar de las diferentes formas que disponemos
@@ -662,7 +663,7 @@ public class Ejercicio2 {
 }
 ```
 
-Es posible reescribir el método boolean, su firma es la siguiente:
+Es posible reescribir el método equals, su firma es la siguiente:
 ```Java
 public boolean equals(Object obj){
   //contenido
@@ -830,7 +831,7 @@ int columnas = matriz[0].lenght;
 
 ### Loop For mejorado
 En lugar de tener un for anidado para leer cada elemento en una matriz, usamos
-el lopp for mejorado. Su sintaxis es la siguiente:
+el loop for mejorado. Su sintaxis es la siguiente:
 
 ```Java
 for (typeName variable : collection){
@@ -841,7 +842,655 @@ for (typeName variable : collection){
 Con esto podemos acceder a cada valor de cada elemento en la matriz pero 
 **NO PODEMOS** modificar sus elementos (**Es solo lectura**).
 
+**Con loop for mejorado**:
+
+```Java
+double[] values = ...;
+double total = 0;
+
+for (double element : value)
+{
+  total = total + element;
+}
+```
+
+**Sin loop for mejorado**:
+
+```Java
+for (int i = 0; i < values.length; i++)
+{
+  double element = values[i]
+  total = total + element;
+}
+```
+
 ### Clases Wrappers
+Los tipos de datos primitivos NO SON OBJETOS. Sin embargo, podemos envolver 
+los tipos de datos para que sean objetos, así, podemos tener los beneficios de un objeto
+al operar con tipos de datos. La clase Wrapper de cada tipo de dato 
+
+![InputStream y OutputStream](./Img/wrappeer.jpg)
+
+Nos valemos del método valueOf() para convertir un primitivo a su respectiva clase
+Wrapper:
+
+```Java
+Float f2 = Float.valueOf("3.14");
+```
+
+#### Autoboxing y Unboxing
+Mecanismos automáticos que tiene Java para convertir datos entre tipos primitivos y sus
+respectivas clases envoltorio.
+
+**1. Autoboxing (Primitivo -> Objeto Wrapper)**:
+Es la conversión automática que hace el compilador cuando pasas un dato primitivo crudo
+a un lugar donde se espera un objeto. Por ejemplo:
+
+```Java
+int primitivo = 10;
+Integer objeto = primitivo; // Autoboxing automático
+
+// Otro ejemplo
+int[] arr = {4, 5, 6, 7};
+
+Integer[] vals = new Integer[10];
+
+for (int = 0; i > vals.length; i++)
+{
+  vals[i] = arr[i];
+}
+```
+
+**2. Unboxing (Objeto Wrapper -> Primitivo)**:
+Proceso inverso; el compilador extrae automáticamente el valor primitivo que está guardado
+dentro del objeto Wrapper.
+
+```Java
+Integer objeto = 20;
+int primitivo = objeto; // Unboxing automático
+
+// Otro ejemplo
+public static int sumOfEven(Integer[] valores)
+{
+  int sum = 0;
+  
+  for (Ingerer i : valores)
+  {
+    if (i % 2 == 0)
+    {
+      sum += i
+    }
+  }
+
+  return sum;
+}
+```
+
+#### Métodos de conversión
+- **xxxValue() - Wrapper -> Primitivo**: Extraen el valor numérico contenido dentro de un
+objeto Wrapper y lo convierten al tipo primitivo deseado. Por ejemplo:
+
+```Java
+Integer var = Integer.valueOf(42);
+
+int i = var.intValue();       // 42 como primitivo int
+double d = var.doubleValue(); // 42.0 como primitivo double
+byte b = var.byteValue();     // 42 como primitivo byte
+```
+
+- **parseXXX() - String -> Primitivo**: Leen una cadena de texto que contiene números y devuelven
+directamente el dato primitivo correspondiente. Por ejemplo:
+
+```Java
+String texto = "150";
+int num = Integer.parseInt(texto);      // Devuelve 150 (tipo primitivo int)
+
+double d = Double.parseDouble("3.14");  // Devuelve 3.14 (tipo primitivo double)
+```
+
+- **toString() - (Objeto o primitivo) -> String**: Convierten el valor numérico en una cadena de 
+texto legible. Por ejemplo:  
+
+```Java
+// Método de instancia:
+Integer obj = Integer.valueOf(100);
+String str1 = obj.toString(); // "100"
+
+// Método estático (directo desde primitivo):
+String str2 = Integer.toString(500); // "500"
+```
+
+Ademas objeto.toString() retorna el nombre de la clase + @ + código hash en hexadecimal
+
+
+## ArrayList
+Es una clase que permite almacenar datos en memoria de forma similar a los Arrays.
+Aquí se podrán almacenar sólo objetos (Por eso son útiles las clases Wrappers), además 
+su estructura es dinámica (No es necesario definir su tamaño al momento de declararse).
+La mayor ventaja de los ArrayList, es que pueden ser heterogéneos. Su sintaxis es:
+
+```Java
+ArrayList<String> friends = new ArrayList<String>();
+
+friends.add("Cindy");
+String name = friends.get(i)
+friends.set(i, "Harry");
+```
+
+En general:
+```Java
+arrayListReference.add(Object);
+
+arrayListReference.get(index); // Reemplazar
+
+arrayListReference.set(index, value);
+```
+
+### Métodos del ArrayList
+
+![InputStream y OutputStream](./Img/metodosArray.jpg)
+
+Es posible pasar de ArrayList a Array, basta con **toArray()**. Por ejemplo:
+
+```Java
+ArrayList<String> nombres = new ArrayList<>();
+nombres.add("Ana");
+
+Object[] arr = nombres.toArray(); // Pierde el tipado específico a String
+```
+
+```Java
+ArrayList<String> nombres = new ArrayList<>();
+nombres.add("Ana");
+nombres.add("Carlos");
+
+// Java dimensiona el array automáticamente según el tamaño de la lista:
+String[] arrNombres = nombres.toArray(new String[0]);
+```
+
+# Herencia, Clases Abstractas, Interfaces y Polimorfismo
+## Herencia
+- Permite la creación de clasificaciones Jerárquicas.
+- Promueve el reuso de código.
+- Minimiza el código duplicado.
+- Una mejor organización del código.
+
+Es casi imposible escribir un código en Java sin usar herencia. De hecho, basta con
+usar la keyword "new" al crear un objeto para que dicho objeto herede de la clase padre
+de Java "Object".
+
+Decimos que una clase hereda de otra con la palabra reservada "extends":
+
+```Java
+public class Padre
+{
+
+}
+
+public class Hijo extends Padre
+{
+
+}
+```
+
+### IS-A vs HAS-A
+En la POO, **IS-A** está relacionado a la herencia. Por ejemplo:
+- El brocoli ES-UN vegetal.
+
+- El estudiante ES-UN persona.
+
+- El profesor ES-UN persona.
+
+Ahora bien, **HAS-A** se basa en el uso y no en la herencia. Por ejemplo:
+- Un caballo ES-UN Animal, Un caballo TIENE-UNA silla.
+
+Por ejemplo:
+- El carro ES-UN vehículo.
+
+- El carro TIENE-UN Motor.
+
+```Java
+public class Carro extends Vehiculo
+{
+  private Motor motor;
+
+  public void mover(double km)
+  {
+    System.out.print("moviendose " + km + "km");
+  }
+}
+```
+
+### Modificador de acceso Protected
+Un miembro de clase, con el modificador "protected" puede acceder
+a los atributos de una superclase a través de Herencia, incluso si la subclase está
+en paqeutes diferentes (Paquetes + Hijos).
+
+### Keyword especial super();
+- Se usa para invocar al constructor de la superclase o clase Padre.
+
+- Se usa para invocar un método de una superclase en un método sobreescrito.
+
+- Para acceder a un miembro de la superclase (en función de sus niveles de acceso).
+
+Por ejemplo:
+Asumamos que Horse hereda de la clase Animal:
+
+```Java
+Horse caballo = new Horse();
+```
+
+![InputStream y OutputStream](./Img/herencia.jpg)
+
+Por cierto, al heredar, lo primero que se debe colocar en el constructor de la subclase es super().
+Ya que Padre -> Hijo (Primero se DEBE de definir el padre, luego el hijo):
+
+```Java
+class Box
+{
+  private int width;
+  private int height;
+
+  public Box(int width, int height)
+  {
+    this.width = width;
+    this.height = height;
+  }
+}
+
+class GifBox extends Box
+{
+  private String color;
+
+  public GiftBox(String color, int width, int height)
+  {
+    super(width, height); // la primera sentencia en un constructor de subclase
+    this.color = color;
+  }
+}
+```
+
+Si el constructor del Padre tuviera argumentos y colocamos super(), en vez de super(argumentos),
+Daría error. Además, si nosotros no colocamos un super() en la primera línea del constructor del
+hijo, Java lo hará implícitamente.
+
+- Las clases con la keyword **final** no son posible heredarlas.
+
+## Polimorfismo
+Es cuando subclases (clases que heredan de un padre) pueden adoptar sus propios comportamientos, y
+a la vez compartir comportamientos de su clase padre. Es decir, pueden realizar los mismo comportamientos
+de un todo pero de diferentes formas (Perro y pantera hereda de animal pero perro no corre como pantera).
+
+Para lograr distinto comportamiento habiendo heredado de una clase Padre, empleamos sobreescritura de métodos.
+
+### Sobreescritura de métodos en Java
+Cada vez que se tenga una subclase que hereda un método de una superclase, se tiene la oportunidad de sobrescribirlo. (A menos que este marcado como final). Como fue dicho, el beneficio principal de la sobreescritura,  es la habilidad de definir comportamiento especializado de una subclase.
+
+Por ejemplo:
+
+```Java
+public class Animal()
+{
+  public void eat()
+  {
+    System.out.println("Generic animal eating generically")
+  }
+  
+  class Horse extends Animal
+  {
+    public void eat()
+    {
+      System.out.println("Horse eating")
+    }
+  }
+}
+```
+
+Es decir, la clase a sobreescribir, DEBE tener la misma firma:
+- La lista de argumentos debe ser exactamente igual que el método que se sobrescribe.
+
+- El tipo de retorno debe ser el mismo de la super clase.
+
+- El nivel de acceso NO puede ser más restrictivo que el método que se sobrescribe. Ejemplo: pasar de Public a Private   
+
+- No puedes sobreescribir un método marcado como final.
+
+- Un método solo puede ser sobrescrito si es heredado.
+
+- los métodos estáticos NO puedes ser sobrescritos.
+
+Considere los siguientes ejemplos:
+
+```Java
+class Animal {
+    private void eat() {
+        System.out.println("Animal general comiendo");
+    }
+}
+
+class Horse extends Animal {
+
+}
+
+public class TestAnimals {
+    public static void main(String[] args) {
+        Horse h = new Horse();
+        h.eat(); // Error! El metodo eat no ha sido heredado
+    }
+}
+```
+
+```Java
+class Animal {
+    private void eat() {
+        System.out.println("Animal general comiendo");
+    }
+}
+
+class Horse extends Animal {
+    public void eat() { // esto no es sobreescritura
+                        // porque el metodo eat no ha sido heredado
+        System.out.println("Caballo comiendo");
+    }
+}
+
+public class TestAnimals2 {
+    public static void main(String[] args) {
+        Horse h = new Horse();
+        h.eat();
+    }
+}
+```
+
+```Java
+class Animal {
+    protected void eat() { // puede ser public tambien
+        System.out.println("Animal general comiendo");
+    }
+}
+
+class Horse extends Animal {
+    public void eat() { // metodo sobreescrito
+        System.out.println("Caballo comiendo");
+    }
+}
+
+public class TestAnimals3 {
+    public static void main(String[] args) {
+        Horse h = new Horse();
+        h.eat();
+    }
+}
+```
+
+```Java
+class Animal {
+    protected void eat() { // puede ser public tambien
+        System.out.println("Animal general comiendo");
+    }
+}
+
+class Horse extends Animal {
+    public void eat() { // metodo sobreescrito
+        super.eat(); // se puede llamar a la version de la clase padre
+        System.out.println("Caballo comiendo");
+    }
+}
+
+public class TestAnimals3 {
+    public static void main(String[] args) {
+        Horse h = new Horse();
+        h.eat();
+    }
+}
+```
+
+#### Ejemplo de sobreescritura .toString()
+- toString() esta definido en la clase Java.lang.Object, retorna una cadena en la forma de: classname@HashCode_in_Hexadecimal_form.
+
+- Dado que todas las clases heredan de Object, podemos sobrescribirlo de acuerdo a nuestras necesidades.
+
+- El método toString() es sobrescrito para proveer información legible acerca del objeto.
+
+Por ejemplo:
+```Java
+class A
+{
+  public int i, j;
+  
+  private void showij()
+  {
+    System.out.println(i + " " + j);
+  }
+
+  @override // Opcional
+  public String toString()
+  {
+    return "A{" + "i=" + i + ", j=" + j + "}";
+  }
+}
+```
+
+#### Notación @override
+- La notación @Override verifica que estés sobrescribiendo el método, de acuerdo a las reglas. De lo contrario genera un error.
+
+- Esto sirve para evitar erróneamente sobrecargar un método en vez de sobrescribirlo.
+
+- Es OPCIONAL.
+
+### Keyword especial instance of
+instance of evalúa en tiempo de ejecución si un objeto pertenece a una clase específica, a 
+cualquiera de sus subclases o si implementa una interfaz determinada. Retorna un booleano.
+
+![instanceOf image](./Img/instanceof.jpg)
+
+### Enlace dinámico
+El enlace dinámico (Dynamic Binding o Late Binding) es el mecanismo por el cual Java decide en tiempo de ejecució (y no
+en compilación) cuál versión de un método sobreescrito debe ejecutarse, basándose en el objeto real instanciado en 
+memoria y no en el tipo de la variable que lo apunta.
+
+1. En tiempo de compilación (Tipo estático): El compilador solo revisa la clase declarada a la izquierda (la 
+referencia). Si el método no existe en esa clase, el código no compila.
+
+2. En tiempo de ejecución (Tipo dinámico): Si el método sí existe en la clase padre y fue sobreescrito, la máquina 
+virtual (JVM) busca la versión implementada por el objeto instanciado a la derecha.
+
+Ahora bien, si una subclase agrega métodos propios y exclusivos que la clase padre no tiene, esos métodos quedan 
+inaccesibles a través de una referencia de la clase padre.
+
+```Java
+class Animal {
+    public void respirar() { ... }
+}
+
+class Perro extends Animal {
+    public void ladrar() { ... } // Método exclusivo de Perro
+}
+
+// Tipo estático: Animal | Tipo dinámico: Perro
+Animal a = new Perro(); 
+
+a.respirar(); // Compila: 'respirar' existe en Animal
+a.ladrar();   // ERROR DE COMPILACIÓN: 'ladrar' NO existe en el tipo estático Animal
+```
+
+Para solucionar esto, hacemos uso de un casteo explícito.
+
+### Upcasting / Downcasting
+
+![Downcasting/Upcasting](/Img/upcastingD.jpg)
+
+#### Upcasting
+EL Upcasting es tratar a un objeto de una clase hija como si fuera del tipo de una clase padre o superclase.
+Este proceso es automático e implícito. Por ejemplo:
+
+```Java
+Dog miPerro = new Dog();
+Mamifero m = miPerro; // Upcasting automático
+Object obj = miPerro; // Upcasting automático
+```
+
+#### Downcasting
+Forzar a una referencia de una clase padre a ser tratada como su clase hija específica para recuperar el acceso a sus 
+métodos propios. Requiere casteo explícito con paréntesis. Por ejemplo:
+
+```Java
+Mamifero m = new Dog(); // La referencia es Mamifero, pero el objeto es Dog
+
+// Downcasting explícito necesario para acceder a métodos de Dog:
+Dog d = (Dog) m;
+```
+
+Considere el siguiente ejemplo:
+
+```Java
+// 1. Clase Padre
+class Animal {
+    public void respirar() {
+        System.out.println("El animal está respirando");
+    }
+}
+
+// 2. Clases Hijas con métodos propios
+class Perro extends Animal {
+    public void ladrar() {
+        System.out.println("¡Guau guau!");
+    }
+}
+
+class Gato extends Animal {
+    public void maullar() {
+        System.out.println("¡Miau miau!");
+    }
+}
+```
+
+Ahora su main:
+```Java
+public class Main {
+    public static void main(String[] args) {
+        // Upcasting implícito: la referencia es Animal, pero el objeto es Perro
+        Animal miMascota = new Perro();
+
+        // 1. Llamada permitida por el tipo estático (Animal)
+        miMascota.respirar();
+
+        // 2. Verificación de tipo antes de castear
+        if (miMascota instanceof Perro) {
+            Perro p = (Perro) miMascota; // Downcasting seguro
+            p.ladrar();                  // Ahora sí podemos acceder al método propio
+        }
+
+        // 3. Demostración de protección contra errores:
+        if (miMascota instanceof Gato) {
+            Gato g = (Gato) miMascota; 
+            g.maullar();
+        } else {
+            System.out.println("miMascota no es un Gato, se evitó un ClassCastException");
+        }
+    }
+}
+```
+
+### Método getClass
+El método getClass() (heredado de la clase universal Object) devuelve un objeto de tipo Class<?> que representa el tipo 
+exacto de la clase con la que fue creado el objeto en tiempo de ejecución. Por ejemplo:
+
+```Java
+public class Main {
+    public static void main(String[] args) {
+        String texto1 = "Hola";
+        String texto2 = "Mundo";
+        Integer numero = 50;
+
+        // Comparación directa 1:
+        if (texto1.getClass() == texto2.getClass()) {
+            System.out.println("texto1 y texto2 son de la misma clase (String)");
+        }
+
+        // Comparación directa 2:
+        if (texto1.getClass() == numero.getClass()) {
+            System.out.println("Son de la misma clase");
+        } else {
+            System.out.println("texto1 y numero son de clases diferentes");
+        }
+    }
+}
+```
+
+### Objects.hash()
+Objects.hash genera un código hash por la secuencia de valores enviados por parámetros. Por ejemplo:
+
+```Java
+int i = Objects.hash("one", 3, 'e');
+System.out.println(i);
+
+// Salida: 105915887
+```
+
+## Abstracción
+### Clase Abstract
+Representan un concepto base genérico o incompleto que no se puede instanciar directamente con new, sirviendo
+exclusivamente como plantilla para que otras subclases la extiendan (extends). Representa una relación estricta de "es
+un" (IS-A). Una subclase solo puede heredar de una única clase abstracta.
+
+A priori, parecería que las clases abstractas, al no poder instanciarlas con la keyword **new**, no tuvieran
+constructores. Sin embargo, Sí tienen constructores, de hecho, se invocan desde las clases hijas mediante super(...) 
+para inicializar atributos heredados.
+
+Existen también métodos abstractos, dichos métodos NO pueden tener código en su cuerpo. Justamente existen métodos
+abstractos para que sus hijos hagan un override del método. **Todo método abstracto debe de estar en una clase** 
+**abstracta pero no toda clase abstracta debe tener métodos abstractos**. **En una clase abstracta también pueden 
+**existir métodos no abstractos**.
+
+```Java
+public abstract class Animal {
+    protected String nombre;
+
+    public Animal(String nombre) {
+        this.nombre = nombre;
+    }
+
+    // Método concreto (lógica compartida con cualquiera que lo herede)
+    public void dormir() {
+        System.out.println(nombre + " está durmiendo...");
+    }
+
+    // Método abstracto (neccesario realizar un override para las subclases)
+    public abstract void emitirSonido();
+}
+```
+
+### Clase Inferface
+Representan un contrato puro de comportamiento o capacidad ("puede hacer" / CAN-DO), independientemente de la jerarquía 
+genealógica de la clase que lo implemente. Para decir que una clase "puede hacer" de una clase interface se usa 
+la keyword **implements** en lugar de **extends**. Una clase puede implementar múltiples interfaces (implements Volador,
+Nadador, Cloneable).
+
+La clase Interface no tiene constructor alguno dado que **todos sus atributos son implícitamente public static final**
+**(constantes globales)**. Sus métodos pueden ser de tipo:
+
+- Abstractos (por defecto): Declarados sin cuerpo. Las clases que implementan la interfaz deben implementarlos.
+
+- Métodos default (desde Java 8): Métodos con cuerpo para brindar una implementación por defecto sin romper clases 
+existentes.
+
+- Métodos static (desde Java 8): Métodos de utilidad que pertenecen a la interfaz.
+
+- Métodos private (desde Java 9): Métodos auxiliares para reutilizar lógica interna entre métodos default.
+
+```Java
+public interface Volador {
+    int ALTURA_MAXIMA = 10000; // public static final implícito
+
+    void volar(); // public abstract implícito
+
+    default void aterrizar() {
+        System.out.println("Aterrizando de forma estándar...");
+    }
+}
+```
+
 
 # Manipulación de datos - Conceptos de flujos de entrada y salida
 Para leer datos de una cierta fuente de datos, Java dispone de **InputStream** y
@@ -1386,9 +2035,11 @@ Los ENUMs con los que cuenta StandardOption son:
 Es posible combinar estás opciones al llamar a Files.Write().
 
 # Serialización y deserialización de objetos
-La Serialización es el proceso de tomar un objeto vivo en la memoria RAM y "aplanarlo" o convertirlo en una secuencia de bytes.
+La Serialización es el proceso de tomar un objeto vivo en la memoria RAM y "aplanarlo" o convertirlo en una secuencia de 
+bytes.
 
-Ésto es útil ya que los objetos en la memoria RAM desaparecen al apagar o cerrar la aplicación. Al convertir un objeto a una secuencia de bytes, es posible:
+Ésto es útil ya que los objetos en la memoria RAM desaparecen al apagar o cerrar la aplicación. Al convertir un objeto a 
+una secuencia de bytes, es posible:
 
 - Guardarlo en el disco duro (en un archivo .dat o .ser) para recuperarlo después.
 
@@ -1533,16 +2184,363 @@ public class Usuario implements Serializable {
 - Si una clase tiene referencia a otra clase, esta debe ser serializable o el proceso no podrá realizarse.
 - Los miembros estáticos de la clase no se serializan (campos, atributos, métodos).
 
+
+
 # Tipo y manejo de excepciones
 Las excepciones son un mecanismo de control de errores en tiempo de ejecución. Así, podemos
 hacer que una aplicación continúe su ejecución si se produce un error. 
 
 En JAVA cuando se detecta un error, se crea un objeto de una clase especial (clase Exception), el cual incluye toda la información del problema, tal como el punto del programa donde se produjo, la causa del error, etc.
 
-Ahora bien, si se da una excepción, el objeto hace un **throw**, con la esperanza de que alguien lo atrape y decida como recuperarse del error. Si nadie lo atrapa, el programa termina, y en la consola de ejecución aparecerá toda la información contenida en el objeto que representaba el error.
+Ahora bien, si se da una excepción, el objeto problemático hace un **throw**, con la esperanza de que alguien lo atrape y decida como recuperarse del error. Si nadie lo atrapa, el programa termina, y en la consola de ejecución aparecerá toda la información contenida en el objeto que representaba el error.
 
 - **throw**: Estado en que el objeto lanza el error(excepción) que puede generar para que alguien atrape ese error
 y pueda solucionarlo, de tal forma que no se detenga la ejecución total del programa.
+
+## Tipos de excepciones
+
+![Clases Vs Objetos](./Img/jerarquias.jpg)
+
+- Error: Se refiere a errores graves en la máquina virtual de Java, como por ejemplo fallos al enlazar con alguna librería. 
+
+- Exception: Representa errores que no son críticos y por lo tanto pueden ser tratados y continuar la ejecución de la aplicación.
+
+Existen 2 tipos de excepciones:
+
+1. Checked: Se revisan en tiempo de compilación. Todas las que heredan de Exception menos RuntimeException.
+
+2. Unchecked: No se revisan en tiempo de compilación sino en tiempo de ejecución (Clases que heredan de
+ RuntimeException).
+
+## Manejo de excepciones
+Ahora que ya vimos qué es una excepción, procedemos a explicar de qué formas disponemos para atrapar dichos
+errores y continuar con la correcta ejecución de nuestro programa.
+
+### Anunciar que una excepción se puede producir (throws exception)
+Cuando un método desea disparar una excepción, se debe indicar como parte de la signatura de
+método usando la clausula throws.
+
+```Java
+public void afiliarSocio( String pCedula, String pNombre, Tipo pTipo ) throws Exception
+{
+  // Code
+}
+```
+
+### Bloque try-catch
+Con el bloque try-catch podemos manejar de forma correcta la excepción
+
+![Clases Vs Objetos](./Img/trycatch.jpg)
+
+- Try: delimitar la porción de código dentro de un método en el que necesitamos desviar el control si una excepción ocurre allí. 
+
+- Catch: definir el código que manejará el error o atrapará la excepción.
+
+Por ejemplo:
+
+```Java
+try{
+    int a = 5 / 0;
+}catch(ArithmeticException err){
+    int a = 0;
+}
+catch(exception e){
+    System.out.println("Ocurrió un error inesperado");
+}
+```
+
+Con este ejemplo es claro que el código dentro del try puede generar más de una excepción, y se pueden capturar 
+todas ellas. De hecho:
+
+```Java
+try { //Código que puede provocar el error } 
+
+catch(IOException ioe) { //Código para tratar la IOException } 
+
+catch(Exception e) { //Código para tratar la Exception }
+```
+
+Es fácil ver que Los catch deben capturar las excepciones más concretas en primer lugar, y las más generales al final.
+Caso contrario, nunca llegaremos a las excepciones concretas.
+
+![Clases Vs Objetos](./Img/tri.jpg)
+
+#### Bloque finally
+Finally se utiliza cuando el programador solicita ciertos recursos al sistema que se deben liberar. Se coloca
+después del último bloque catch o luego del bloque try. Por ejemplo: 
+
+```Java
+FileReader lector = null;
+
+try {
+    lector = new FileReader("archivo.txt");
+    int i=0;
+    while(i != -1){
+        i = lector.read();
+        System.out.println((char) i );
+    }
+} catch (IOException e) {
+    System.out.println("Error");
+} finally {
+    if(lector != null){
+            lector.close();
+    }
+}
+```
+
+### Try-with-resources
+Es una estructura introducida en Java 7 que permite declarar recursos dentro de los paréntesis del try (...) para que 
+Java los cierre automáticamente al terminar el bloque, sin necesidad de escribir un finally manual.
+
+Cabe aclarar que, un recurso es cualquier objeto que maneja conexiones externas del sistema operativo (archivos, sockets 
+de red, conexiones a bases de datos, Scanner, flujos de entrada/salida) y que debe cerrarse obligatoriamente para no 
+dejar fugas de memoria (resource leaks).
+
+Sólo Objetos que implementan java.lang.AutoCloseable pueden ser usados como recursos. Por ejemplo:
+
+```Java
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class ReadFileExample2 {
+	private static final String FILENAME = "E:\\test\\filename.txt";
+
+	public static void main(String[] args) {
+		try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
+			String sCurrentLine;
+			while ((sCurrentLine = br.readLine()) != null) {
+				System.out.println(sCurrentLine);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+  
+}
+```
+
+
+# Programación concurrente
+## Concurrencia y Paralelismo
+**La concurrencia** es la capacidad de una aplicación o sistema para estructurarse de modo que múltiples 
+tareas progresen en un mismo intervalo de tiempo, alternando entre ellas. **Funcionamiento**: 
+La CPU ejecuta un pedazo de la **Task 1**, luego salta a la **Task 2**, luego vuelve a la 
+**Task 1**, y así sucesivamente tan rápido que da la ilusión de que ocurren al mismo tiempo. **Puede ocurrir en un sólo núcleo/procesado**.
+
+Por ejemplo: realizar otra tarea mientras se realiza lectura o escritura en el disco.
+
+**El paralelismo** es la ejecución física y literalmente simultánea de dos o más tareas en el mismo instante exacto de tiempo. **Funcionamiento**: Task 1 se ejecuta de inicio a fin en el Núcleo 1, mientras que Task 2 se ejecuta de forma independiente y al mismo tiempo en el Núcleo 2. **solo es posible en sistemas multinúcleo, multiprocesador o distribuidos**.
+
+![Clases Vs Objetos](./Img/paralelismo.jpg)
+
+
+## Hilos (Teoría)
+Un hilo es la unidad básica más pequeña de procesamiento que el sistema operativo puede planificar y ejecutar en la CPU:
+
+- Lista secuencial de instrucciones: Es un camino único de código que se ejecuta paso a paso (línea 1, luego línea 2, luego línea 3).
+
+- El hilo principal (main): Todo programa en Java arranca por defecto con al menos un hilo, el hilo main. Cuando ejecutas tu aplicación, la CPU sigue esa lista de instrucciones de arriba hacia abajo.
+
+De esta forma, si tenemos un programa de un solo hilo: **Tendríamos tareas bloqueantes, es decir, si la tarea N tarda 10 segundos leyendo un archivo en disco, el hilo se congela esperando**.
+
+
+![singlethread](./Img/mainThrd.jpg)
+
+### Multihilos
+Es la capacidad de mantener varios hilos de ejecución. De esta forma, ya no se daría que una tarea A se ejecute, bloqueando a otra tarea B posterior a tarea A.
+
+
+![Hilos](./Img/allThrd.jpg)
+
+En programación paralela se crean tantos hijos como núcleos diferentes dispone el sistema
+y se divide entre ellos la tarea que deseamos realizar.
+
+![Hilos](./Img/ncl.jpg)
+
+
+## Hilos (Java)
+La **clase Thread** en Java es aquella clase que encapsula todo el control necesario sobre los hilos 
+de ejecución(Threads). Thread se encuentra en el paquete java.lang. la clase **Thread** implementa la 
+interdaz Runnable.
+
+### Atributos de la clase Thread
+
+![alt text](./Img/prop.jpg)
+
+### Constructores de la clase Thread
+
+![alt text](./Img/const.jpg)
+
+**Runnable**: Es simplemente una interfaz estándar de Java cuya única misión es contener la tarea o el bloque de código que quieres que un hilo ejecute.
+
+### ¿Cuál es la diferencia entre “Extends Thread” y “Implements Runnable”?
+- **Extender Thread**: tu clase ES un hilo ("is-a Thread"). Literalmente heredas todo el comportamiento de Thread y le
+agregas tu lógica sobreescribiendo run().
+
+- **Implementar Runnable**: tu clase TIENE una tarea que se puede ejecutar ("has-a task"), pero no es un hilo en sí
+misma. Es solo un objeto con un método run(); necesitas un Thread aparte para realmente ejecutarla.
+
+### Ejemplo
+#### Extends Thread
+```Java
+public class Main {
+    public static void main(String[] args) {
+        // Uso:
+        Tarea tarea1 = new Tarea();
+        tarea1.start(); // El objeto MISMO es el hilo
+
+        // (Opcional) Puedes crear un segundo hilo para ver cómo intercalan:
+        // Tarea tarea2 = new Tarea();
+        // tarea2.start();
+    }
+}
+
+class Tarea extends Thread {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 500; i++) {
+            System.out.println(getName() + " : " + i); // getName(): Obtener nombre del núcleo
+        }
+    }
+}
+```
+
+#### Extends Runnable
+```Java
+public class Main {
+    public static void main(String[] args) {
+        // Uso:
+        Tarea2 tarea1 = new Tarea2();
+        Thread t1 = new Thread(tarea1); // el objeto es solo la TAREA
+        t1.start();                      // el hilo real es t1
+    }
+}
+
+class Tarea2 implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 50; i++) {
+            System.out.println(i);
+        }
+    }
+}
+```
+
+### Estados de un hilo 
+
+![alt text](./Img/estados.jpg)
+
+#### Estado New
+Al instanciar el objeto con new Thread(), el objeto existe en la memoria RAM (Heap), pero todavía no es
+un hilo activo en el sistema operativo ni consume tiempo de CPU.
+
+```Java
+Thread t = new Thread(() -> {
+    System.out.println("Ejecutando");
+});
+
+// El hilo aún no se ha lanzado
+System.out.println(t.getState()); 
+// Salida: NEW
+```
+
+**.getState()**: Retorna el estado del hilo.
+
+#### Estado Ejecutable/Runnable
+Al llamar a start(), la JVM crea el hilo real del sistema operativo y lo coloca en la cola de listos. A partir de aquí, el hilo compite por tiempo de CPU junto con los demás hilos activos.
+
+```Java
+t.start();
+System.out.println(t.getState());
+// Salida: RUNNABLE
+// (puede alternar entre "listo" y
+//  "corriendo" sin que Java lo distinga)
+```
+
+#### Estado Running
+Ocurre cuando el planificador le asigna al hilo un intervalo real de CPU (quantum). El hilo procesa instrucciones hasta
+que ocurra alguno de estos tres eventos:
+
+- Se acaba su tiempo: El sistema operativo le retira la CPU y vuelve a RUNNABLE (listo), esperando su próximo turno.
+
+- Termina su trabajo: El método run() finaliza por completo → pasa a TERMINATED (muerto).
+
+- Alguien lo detiene: Uso de stop() — método obsoleto y peligroso, puede dejar objetos en estado inconsistente.
+
+
+```Java
+// Ejemplo: perder la CPU no interrumpe el bucle, solo pausa su avance
+public void run() {
+    for (int i = 1; i <= 500; i++) System.out.println(getName() + " : " + i);
+} // Al llegar aquí (fin del for), el hilo pasa de RUNNING a TERMINATED
+```
+
+#### Estado Sleep (Dormido)
+Se activa al invocar **Thread.sleep(millis)**. El hilo no consume CPU durante ese tiempo — no es candidato a que se le
+asigne el procesador hasta que se cumpla el plazo.
+
+```Java
+public void run() {
+    for (int i = 1; i <= 5; i++) {
+        System.out.println(getName() + ": " + i);
+        try {
+            Thread.sleep(3000); // milisegundos
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### Estado bloqueado (Blocked)
+En el diagrama clásico se asocia solo a la espera de E/S, pero en la API real de Java, BLOCKED tiene un significado más
+preciso: un hilo está bloqueado cuando espera entrar a una sección synchronized que otro hilo ya tiene bloqueada
+(su"candado" o lock).
+
+```Java
+Object candado = new Object();
+
+public void run() {
+    synchronized (candado) {
+        // si otro hilo ya está aquí dentro,
+        // este hilo queda BLOCKED hasta
+        // que el candado quede libre
+        procesarDatos();
+    }
+}
+```
+
+Es decir, que si 2 mismos hilos (Hilo A, Hilo B) se crean con un mismo Runnable y, si Hilo B intenta entrar al bloque synchronized mientras Hilo A todavía está adentro, decimos que Hilo B está en estado bloqueado.
+
+
+#### Estado Suspendido
+```Java
+private volatile boolean pausado = false;
+private final Object monitor = new Object();
+
+public void run() {
+    while (activo) {
+        synchronized (monitor) {
+            // Si está pausado, entra a wait() y LIBERA el monitor
+            while (pausado) {
+                try {
+                    monitor.wait(); // Pausa el hilo de forma segura
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
+        // ... trabajo normal del hilo ...
+    }
+}
+// pausar():  pausado = true;
+// reanudar(): synchronized(monitor){ pausado=false; monitor.notify(); }
+```
+
+
+
+
 
 
 
