@@ -1479,6 +1479,8 @@ existentes.
 
 - Métodos private (desde Java 9): Métodos auxiliares para reutilizar lógica interna entre métodos default.
 
+Todos los métodos sin cuerpo en una interfaz son implícitamente **public abstract**
+
 ```Java
 public interface Volador {
     int ALTURA_MAXIMA = 10000; // public static final implícito
@@ -2261,7 +2263,7 @@ catch(Exception e) { //Código para tratar la Exception }
 ```
 
 Es fácil ver que Los catch deben capturar las excepciones más concretas en primer lugar, y las más generales al final.
-Caso contrario, nunca llegaremos a las excepciones concretas.
+Caso contrario, nunca llegaremos a las excepciones concretas y se produce un error de compilación.
 
 ![Clases Vs Objetos](./Img/tri.jpg)
 
@@ -2308,7 +2310,9 @@ public class ReadFileExample2 {
 
 	public static void main(String[] args) {
 		try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
+
 			String sCurrentLine;
+
 			while ((sCurrentLine = br.readLine()) != null) {
 				System.out.println(sCurrentLine);
 			}
@@ -2316,9 +2320,285 @@ public class ReadFileExample2 {
 			e.printStackTrace();
 		}
 	}
-  
+
 }
 ```
+## Construcción de un Objeto Exception y la Instrucción throw
+Por código, también podemos lanzar las excepciones que se han venido estudiando. Esto es posible con la instrucción
+throw (la cual se complementa con una excepción), esta instrucción recibe como parámetro un objeto de la clase 
+Exception, el cual es lanzado o disparado al método que corresponda.
+
+```Java
+public static int dividir(int a, int b) throws MalNumeroADividir{
+
+    if(b == 0){
+        throw new MalNumeroADividir();
+    }
+
+    return a / b;
+}
+```
+
+```Java
+public static class MalNumeroADividir extends Exception { // Throw necesita una exception
+    MalNumeroADividir() {
+       super("No es posible dividir entre cero");
+   }
+}
+```
+
+```Java
+public static void main(String[] args) {
+
+    int a;
+
+    try{
+        a = dividir(5,0);
+    }catch(MalNumeroADividir err){
+        System.out.println(err);
+    }finally{
+        a = 0;
+    }
+    System.out.println("Valor de a = "+a);
+}
+```
+
+### Clase Exception
+
+- getMessage(): retorna el mensaje con el que fue creada la excepción.
+
+- printStackTrace(): imprime en la consola de ejecución la traza incluida en el objeto (la secuencia anidada}
+de invocaciones de métodos que dio lugar al error), tratando de informar al usuario respecto de la posición y la
+causa del error.
+
+#### Excepciones personalizadas
+Para crear una excepción propia hay que definir una clase derivada de la clase base Exception. Por ejemplo:
+
+```Java
+public class ExcepcionIntervalo extends Exception {
+    public ExcepcionIntervalo(String msg) {
+        super(msg);
+    }
+}
+```
+
+Ejemplo:
+
+El siguiente código retorna un error de compilación ya que throw no lanza primitivos (los bloque try-catch tampoco 
+atrapan primitivos), únicamente objetos que hereden de **java.lang.Throwable** pueden estar en un throw.
+
+```Java
+class Principal {
+   public static void main(String args[]) {
+      try {
+         throw 20;
+      }
+      catch(int e) {
+         System.out.println("Got the  Exception " + e);
+      }
+  }
+}
+```
+
+### Reglas para sobreescritura con excepciones
+Dado que hemos visto sobreescritura de métodos (@override), procedemos a ver sobreescritura
+con métodos que provoquen excepciones (métodos con throw).
+
+- Regla 1: Si el método en la superclase no declara ninguna excepción usando **throws**, entonces el
+método sobreescrito en la subclase no puede declarar ninguna **checked exception** aunque puede declarar
+**unchecked exception** con la cláusula throws.
+
+- Regla 2: Si el método en la superclase ha declarado una excepción usando throws entonces la sobreescritura
+del método en la subclase puede:
+ 
+  - 1. NO PONER ninguna excepción (reducir a cero).
+  
+  ```Java
+  class Parent{
+      public void displayMsg() throws IOException{
+          System.out.println("In Parent displayMsg()");
+      }
+  }
+  public class ExceptionOverrideDemo extends Parent{
+      public void displayMsg(){  
+          System.out.println("In ExceptionOverrideDemo displayMsg()"); 
+      }  
+
+  }
+  ```
+
+
+  - 2. Poner la MISMA excepción.
+
+  ```Java
+  class Parent{
+      public void displayMsg() throws IOException{
+          System.out.println("In Parent displayMsg()");
+      }
+  }
+  public class ExceptionOverrideDemo extends Parent{
+      public void displayMsg() throws IOException{  
+          System.out.println("In ExceptionOverrideDemo displayMsg()"); 
+      }  
+  } 
+  ```
+
+
+  - 3.Poner SUBCLASES (hijas más específicas).
+
+  ```Java
+  class Parent{
+    public void displayMsg() throws IOException{
+      System.out.println("In Parent displayMsg()");
+    }
+  }
+  public class ExceptionOverrideDemo extends Parent{
+    public void displayMsg() throws FileNotFoundException{  
+      System.out.println("In ExceptionOverrideDemo displayMsg()"); 
+    }  
+  }
+  ```
+
+# Programación con interfaces gráficas de usuario (GUI) y manejo de eventos
+## Java Fx
+JavaFX es una API diseñada para crear Interfaces Gráficas de Usuario (GUI)  en reemplazo de Swing. Dicho API
+cuenta con más de 30 paquetes. Consta de características como:
+
+- soporta estilos mediante CSS.
+
+- aceleración gráfica por hardware.
+
+- aplicar efectos y animaciones fácilmente.
+
+- gráficos 2D y 3D.
+
+- la UI pueden ser construidas usando código Java o archivos FXML.
+
+- provee soporte multimedia para la reproducción de audio y video, etc.
+
+
+### Estructura de una aplicación con JavaFx
+
+- **javafx.application.Application**: es el punto de entrada para las aplicaciones con JAVAFx
+
+- **javafx.stage.Stage**: es el contenedor de más alto nivel. El Stage principal es construido por la plataforma.
+
+- **javafx.scene.Scene**: contenedor para todo el contenido en una escena gráfica.
+
+- **javafx.scene.Node**: clase para los nodos en la escena.
+
+![Clases Vs Objetos](./Img/node.jpg)
+
+
+### Clase Stage
+La clase Stage nos permite manejar las ventanas creada por la API JavaFX. contamos con el Stage creado
+automáticamente por JavaFX: primaryStage, el cual representa la ventana principal. Se encuentre en el 
+paquete **javafx.stage**.
+
+### Clase Scene
+Es un contenedor para los elementos que conforman la GUI, puede contener uno o varios elementos organizados
+de manera jerárquica en forma de árbol (Scene Graph). Se encuentra en el paquete **javafx.scene**.
+
+### Clase Node
+Los elementos que contiene un Scene deben extender la clase base Node. Estos elementos son incluidos de manera
+jerárquica en el scene graph y son llamados nodos al elemento ubicado en el tope de la jerarquía es llamado
+“root node”. Se encuentra en el paquete **javafx.scene**.
+
+### Crear una aplicación JavaFx
+Para crear una aplicación JavaFX solamente debemos extender la clase Application y sobrescribir el 
+método start(Stage primaryStage). El método start es el punto de inicio de nuestra aplicación, el Stage llamado
+primaryStage es creado automáticamente y representa nuestra ventana principal o primaria:
+
+```Java
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+ @Override
+ public void start(Stage primaryStage) throws Exception {
+  // aquí inicia la aplicación
+ }
+}
+```
+
+Para mostrar una ventana:
+
+```Java
+import javafx.application.Application;
+import javafx.stage.Stage;
+ 
+public class Main extends Application {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // establecer el nuevo titulo de la ventana
+        primaryStage.setTitle("Hello JavaFX Application");
+ 
+        // mostrar la ventana principal
+        primaryStage.show();
+    }
+}
+```
+
+Para crear un Scene y mostrar:
+```Java
+import javafx.application.Application;
+import javafx.stage.Stage;
+ 
+public class Main extends Application {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // establecer el nuevo titulo de la ventana
+        primaryStage.setTitle("Hello JavaFX Application");
+ 
+        // mostrar la ventana principal
+        primaryStage.show();
+    }
+}
+```
+
+## Clase Anónima 
+Al momento de instanciar un objeto, podemos decirle a Java "Oye crea una subclase 'al vuelo' (sin ponerle nombre) que
+herede de esta clase o interfaz y sobreescribe estos métodos aquí mismo".
+
+Esto es útil, para cuando necesitas modificar el comportamiento de una clase o implementar una interfaz
+para un solo uso específico, sin tener que crear un archivo .java separado. Por ejemplo:
+
+```Java
+Runnable miTarea = new Runnable() {
+    @Override
+    public void run() {
+        System.out.println("Ejecutando código en un hilo");
+    }
+}
+```
+
+### Expresiones lambda
+Una expresión o función lambda en Java es una forma concisa y directa de escribir una función anónima
+(un método sin nombre) que se puede tratar como un valor, guardarse en una variable o pasarse directamente como 
+argumento a otro método. Su sintaxis más básica es:
+
+```Java
+(parámetros) -> { cuerpo del código }
+```
+
+Ejemplo con un hilo:
+
+```Java
+// Forma antigua (Clase anónima engorrosa):
+Runnable r1 = new Runnable() {
+    @Override
+    public void run() {
+        System.out.println("Ejecutando hilo");
+    }
+};
+
+// Con Lambda (Limpio y directo):
+Runnable r2 = () -> System.out.println("Ejecutando hilo");
+```
+
+Cuando el compilador ve el operador flecha -> asignado a una variable de tipo Runnable, reconoce que
+se trata de una expresión funcional. Internamente, la máquina virtual crea e inicializa un objeto en memoria que
+implementa esa interfaz al vuelo sin que tú tengas que escribir manualmente la palabra clave new.
 
 
 # Programación concurrente
@@ -2435,6 +2715,8 @@ class Tarea2 implements Runnable {
 Al instanciar el objeto con new Thread(), el objeto existe en la memoria RAM (Heap), pero todavía no es
 un hilo activo en el sistema operativo ni consume tiempo de CPU.
 
+Con lambda:
+
 ```Java
 Thread t = new Thread(() -> {
     System.out.println("Ejecutando");
@@ -2445,9 +2727,26 @@ System.out.println(t.getState());
 // Salida: NEW
 ```
 
-**.getState()**: Retorna el estado del hilo.
+Equivalente sin lambda:
 
-#### Estado Ejecutable/Runnable
+```Java
+Thread t = new Thread(new Runnable() {
+    @Override
+    public void run() {
+        System.out.println("Ejecutando");
+    }
+});
+```
+
+- **.getState()**: Retorna el estado del hilo.
+
+En este estado, llamar a cualquier método de Thread que no sea start() (por ejemplo getName()
+en versiones antiguas de la JVM, o volver a intentar otra inicialización) puede producir IllegalThreadStateException.
+La única acción válida es start() una única vez ya que no se puede reiniciar un hilo que ya arrancó o murió (No se 
+puede sobre un mismo hilo llamar a start() 2 veces).
+
+
+#### Estado Ejecutable/Runnable (Listo)
 Al llamar a start(), la JVM crea el hilo real del sistema operativo y lo coloca en la cola de listos. A partir de aquí, el hilo compite por tiempo de CPU junto con los demás hilos activos.
 
 ```Java
@@ -2458,16 +2757,21 @@ System.out.println(t.getState());
 //  "corriendo" sin que Java lo distinga)
 ```
 
-#### Estado Running
-Ocurre cuando el planificador le asigna al hilo un intervalo real de CPU (quantum). El hilo procesa instrucciones hasta
-que ocurra alguno de estos tres eventos:
+El planificador (scheduler) del sistema operativo decide cuándo y por cuánto tiempo cada hilo RUNNABLE 
+recibe CPU real Java no controla ese detalle directamente, solo lo solicita.
 
-- Se acaba su tiempo: El sistema operativo le retira la CPU y vuelve a RUNNABLE (listo), esperando su próximo turno.
+**Nota**: Llamar directamente a t.run() NO cambia el estado a RUNNABLE — ejecuta el código como un 
+método normal, en el hilo que hace la llamada, sin crear un hilo del sistema operativo.
 
-- Termina su trabajo: El método run() finaliza por completo → pasa a TERMINATED (muerto).
 
-- Alguien lo detiene: Uso de stop() — método obsoleto y peligroso, puede dejar objetos en estado inconsistente.
+#### Estado Running (Ejecutándose)
+Ocurre cuando el planificador le asigna al hilo un intervalo real de CPU (quantum). El hilo procesa instrucciones hasta que ocurra alguno de estos tres eventos:
 
+- Se acaba su tiempo: El sistema operativo le retira la CPU y vuelve a **RUNNABLE (listo)**, esperando su próximo turno.
+
+- Termina su trabajo: El método **run()** finaliza por completo → pasa a **TERMINATED (muerto)**.
+
+- Alguien lo detiene: Uso de **stop()** — método obsoleto y peligroso, puede dejar objetos en estado inconsistente.
 
 ```Java
 // Ejemplo: perder la CPU no interrumpe el bucle, solo pausa su avance
@@ -2476,9 +2780,9 @@ public void run() {
 } // Al llegar aquí (fin del for), el hilo pasa de RUNNING a TERMINATED
 ```
 
-#### Estado Sleep (Dormido)
-Se activa al invocar **Thread.sleep(millis)**. El hilo no consume CPU durante ese tiempo — no es candidato a que se le
-asigne el procesador hasta que se cumpla el plazo.
+#### Estado Timed_Waiting
+Se activa al invocar **Thread.sleep(millis ms)**. El hilo **no consume CPU** durante ese tiempo — no 
+es candidato a que se le asigne el procesador hasta que se cumpla el plazo.
 
 ```Java
 public void run() {
@@ -2493,10 +2797,16 @@ public void run() {
 }
 ```
 
+**¿Por qué el try catch si solo dormimos al proceso?**
+sleep() declara InterruptedException — es una excepción checked que ocurre si otro hilo (Despierto) 
+interrumpe (llama) la espera con interrupt(). Java obliga a manejarla explícitamente, ya sea con try/
+catch o relanzándola en la firma del método.
+
+
 #### Estado bloqueado (Blocked)
-En el diagrama clásico se asocia solo a la espera de E/S, pero en la API real de Java, BLOCKED tiene un significado más
-preciso: un hilo está bloqueado cuando espera entrar a una sección synchronized que otro hilo ya tiene bloqueada
-(su"candado" o lock).
+En el diagrama clásico se asocia solo a la espera de E/S, pero en la API real de Java, BLOCKED tiene 
+un significado más preciso: un hilo está bloqueado cuando espera entrar a una sección synchronized que 
+otro hilo ya tiene bloqueada (su "candado" o lock).
 
 ```Java
 Object candado = new Object();
@@ -2511,10 +2821,23 @@ public void run() {
 }
 ```
 
-Es decir, que si 2 mismos hilos (Hilo A, Hilo B) se crean con un mismo Runnable y, si Hilo B intenta entrar al bloque synchronized mientras Hilo A todavía está adentro, decimos que Hilo B está en estado bloqueado.
+Es decir, que si 2 mismos hilos (Hilo A, Hilo B) se crean con un mismo Runnable y, si Hilo B intenta 
+entrar al bloque synchronized mientras Hilo A todavía está adentro, decimos que Hilo B está en estado 
+bloqueado (Usar con riesgo de...)
 
 
 #### Estado Suspendido
+Se activa al invocar suspend(); el hilo permanece congelado hasta que alguien llame a resume(). 
+Tampoco consume recursos en este estado.
+
+**NOTA**: suspend() y resume() están OBSOLETOS (deprecated) desde Java 1.2: si un hilo se suspende justo cuando
+tiene un lock (candado) tomado, ningún otro hilo puede liberarlo — provoca interbloqueos (deadlocks) con mucha
+facilidad. No deben usarse en código nuevo.
+
+Dicho esto, cabe aclarar que actualmente existe una mejor alternativa a esto:
+
+Con esto, en lugar de congelar al hilo a la fuerza desde afuera, el hilo decide pausarse a sí mismo de forma controlada:
+
 ```Java
 private volatile boolean pausado = false;
 private final Object monitor = new Object();
@@ -2538,12 +2861,115 @@ public void run() {
 // reanudar(): synchronized(monitor){ pausado=false; monitor.notify(); }
 ```
 
+Se compone de:
+
+- **Variable bandera (volatile boolean pausado)**: Una variable compartida que indica si el hilo debe detenerse 
+temporalmente.
+
+- **El método wait()**: Cuando pausado es true, el hilo entra en espera llamando a monitor.wait(). A diferencia de 
+suspend(), wait() sí libera el candado automáticamente mientras duerme, permitiendo que otros hilos sigan trabajando.
+
+- **El método notify()**: Cuando quieres reanudarlo, cambias la variable pausado = false; y llamas a monitor.notify() 
+para avisarle que despierte y continúe.
 
 
+#### Estado Waiting
+Se activa al invocar wait() (dentro de un bloque synchronized). El hilo libera el candado que tenía y
+pasa a un "pool" de espera hasta que otro hilo llame a notify() o notifyAll() sobre ese mismo objeto.
 
+```Java
+// Hilo consumidor
+synchronized (monitor) {
+    while (!listo) {
+        monitor.wait(); // libera el lock
+    }                  // y espera aquí
+    procesar();
+}
+```
 
+```Java
+// Hilo productor
+synchronized (monitor) {
+    listo = true;
+    monitor.notify();
+    // notifyAll() si hay
+    // varios hilos esperando
+}
+```
 
+#### Estado Terminated
+La forma normal y segura de morir es que el método run() finalice, ya sea porque termina su lógica o
+porque se lanza una excepción no capturada dentro de él.
 
+```Java
+public void run() {
+    System.out.println("Trabajo terminado");
+} // al salir de run(), el hilo pasa
+  // automáticamente a TERMINATED
+```
 
+**NOTA**: stop() también puede matar un hilo de forma forzada, pero está obsoleto: puede interrumpir
+al hilo en medio de una operación crítica y dejar datos compartidos a medio modificar.
 
+Además, dado que el hilo ya realizó su trabajo, NO se puede reiniciar. De hecho:
 
+```Java
+Thread t = new Thread(new Test());
+
+t.start();
+t.start(); // ← IllegalThreadStateException: ya está TERMINATED (o ya se lanzó antes)
+// Cada hilo se puede lanzar UNA sola vez en toda su vida.
+```
+
+### Mértodos de la clase Thread
+- **start()**: Inicia el hilo: crea el hilo del SO y la JVM llama a run() automáticamente.
+
+- **run()**: Cuerpo del hilo. Único método de la interfaz Runnable. Llamarlo directamente NO
+crea un hilo nuevo.
+
+- **stop()**: Detiene el hilo de inmediato. **Obsoleto**; puede dejar objetos compartidos 
+inconsistentes.
+
+- **sleep(long millis)**: Duerme el hilo actual el tiempo indicado, sin consumir CPU.
+
+```Java
+Tarea tarea1 = new Tarea();
+
+tarea1.start();          // -> llama a run() en un hilo nuevo
+tarea1.run();            // -> ejecuta run() en el hilo ACTUAL (sin concurrencia)
+Thread.sleep(1000);      // -> pausa el hilo que ejecuta esta línea, 1000 ms
+```
+
+- **join()**: Pausa el hilo actual (Por ejemplo el main) hasta que el hilo sobre el que se invoca termine
+de ejecutarse.
+
+- **suspend()**: Interrumpe temporalmente la ejecución. Obsoleto (riesgo de deadlock).
+
+- **resume()**: Reanuda un hilo suspendido. Obsoleto, se usa junto a suspend().
+
+- **isAlive()**: true si el hilo ya fue lanzado con start() y todavía no ha muerto.
+
+```Java
+Thread t1 = new Thread(new Tarea());
+
+t1.start();
+t1.join();                // el hilo principal ESPERA aquí a que t1 termine
+System.out.println("t1 vivo? " + t1.isAlive());  // false, ya terminó
+```
+
+- **setPriority(int p)**: Asigna prioridad al hilo (valores de 1 a 10). Es solo una sugerencia al SO.
+
+- **getPriority()**: Retorna la prioridad actual del hilo.
+
+- **setName(String n)**: Cambia el nombre del hilo y facilita depurar programas multihilo.
+
+- **getName()**: Retorna el nombre del hilo.
+
+```Java
+Thread t1 = new Thread(new Tarea(), "HiloDescarga");
+
+t1.setPriority(Thread.MAX_PRIORITY); // 10
+
+System.out.println(t1.getName() + " prioridad: " + t1.getPriority());
+// Salida: HiloDescarga prioridad: 10
+```
