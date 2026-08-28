@@ -1,4 +1,3 @@
-<img width="1069" height="322" alt="image" src="https://github.com/user-attachments/assets/749c968f-d69b-4059-92c7-3e8b7cdc235d" />
 # Programación Orientada a Objetos
 ## Bases de POO
 Luego de haber aprendido la programación estructural en fundamentos
@@ -2170,6 +2169,8 @@ Podemos establecer "manualmente" la versión UID de la clase:
 ```Java
 private static final long serialVersionUID = 8799656478674716638L;
 ```
+
+<img width="1069" height="322" alt="image" src="https://github.com/user-attachments/assets/749c968f-d69b-4059-92c7-3e8b7cdc235d" />
 
 ### Modificador transient
 Si al serializar el objeto, deseamos que NO se guarde el tipo de dato de una variable
